@@ -1,0 +1,18 @@
+============================================================
+Model C — Von Mises Profile Likelihood Report
+============================================================
+  N                 = 19
+  Observed R        = 0.5052
+  κ_MLE (approx)    = 1.1667
+  NLL at κ=0        = 34.92
+  NLL at κ_MLE      = 29.71
+  NLL at κ=2.5      = 33.55
+  ΔNLL(κ=2.5 − κ=0) = -1.37
+  ΔNLL(κ=0 − κ_MLE) = 5.21
+  ΔNLL(κ=2.5 − κ_MLE) = 3.84
+
+  κ range with ΔNLL < 0.5: [0.81, 1.59]
+
+  κ range with ΔNLL < 2.0 (≈95% CI): [0.43, 2.09]
+Figure saved: /mnt/d/Papers/MNRAS/submission_record/scripts/output/model_c_likelihood_profile.png
+============================================================

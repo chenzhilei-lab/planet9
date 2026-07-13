@@ -1,0 +1,6 @@
+Model B Systematic Uncertainty Analysis
+R_obs = 0.5052, N = 19
+Model B N_eff ≈ 9 (η ≈ 0.47)
+Systematic uncertainty (±15% η): p ∈ [0.143, 0.067]
+Conservative range: p ∈ [0.029, 0.298]
+Direct MC: p = 0.131 [0.122, 0.140]

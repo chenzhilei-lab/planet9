@@ -1,0 +1,41 @@
+======================================================================
+Multiple Testing Correction for ETNO Clustering p-values
+======================================================================
+  Number of tests (k) = 5
+  Nominal α           = 0.05
+
+Method                                      p_raw   Bonferroni     BH-FDR       Holm
+----------------------------------------------------------------------
+Uncorrected Rayleigh                       0.0080       0.0400     0.0400     0.0400
+Model~A (Brown \& Batygin)                 0.0230       0.1150     0.0575     0.0920
+Model~B (OSSOS, simplified)                0.0890       0.4450     0.1483     0.2670
+Model~C (Napier et al., soft upper bound)   0.1780       0.8900     0.2225     0.3560
+Model~D (bootstrap empirical null)         0.3770       1.0000     0.3770     0.3770
+
+Significance at α=0.05 after correction:
+----------------------------------------------------------------------
+  Uncorrected Rayleigh                     raw=✓  Bonf=✓  BH=✓  Holm=✓
+  Model~A (Brown \& Batygin)               raw=✓  Bonf=—  BH=—  Holm=—
+  Model~B (OSSOS, simplified)              raw=—  Bonf=—  BH=—  Holm=—
+  Model~C (Napier et al., soft upper bound) raw=—  Bonf=—  BH=—  Holm=—
+  Model~D (bootstrap empirical null)       raw=—  Bonf=—  BH=—  Holm=—
+
+======================================================================
+KEY FINDING
+======================================================================
+After Bonferroni correction (×5), only the uncorrected Rayleigh test
+remains significant (p_bonf = 0.040). All bias-corrected models
+cross the α=0.05 threshold after correction:
+  Model A: p_bonf = 0.115
+  Model B: p_bonf = 0.445
+  Model C: p_bonf = 0.890
+  Model D: p_bonf = 1.000
+
+CAVEAT: The four models test incommensurable null hypotheses and are
+not exchangeable replicates. The Bonferroni correction is conservative
+and provided for completeness only; the paper's central argument does
+not rest on any single p-value crossing α=0.05, but on the range of
+p-values across defensible methods.
+
+LaTeX table saved: /mnt/d/Papers/MNRAS/submission_record/scripts/output/multiple_testing_correction.tex
+Plain text saved: /mnt/d/Papers/MNRAS/submission_record/scripts/output/multiple_testing_correction.txt

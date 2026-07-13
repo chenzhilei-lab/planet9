@@ -1,41 +1,49 @@
-# Orbital-Anomaly Predictions: Monte Carlo Power Analysis
+# planet9 — ETNO Clustering Statistical Calibration Pipeline
 
-Supporting code for the manuscript:
+An open-source pipeline for auditing the statistical evidence for Planet Nine from extreme trans-Neptunian object (ETNO) perihelion clustering.
 
-> **"Orbital-Anomaly Predictions: A Historical Diagnostic Checklist for the LSST Era"**
-> Zhilei Chen
-> *Submitted to Nature Astronomy*
+**Manuscript**: "How much does the null hypothesis matter? A model-free bootstrap exposes the assumption-dependence of ETNO clustering significance" (under review at RAA / SCPMA, 2026).
 
-## Contents
+## Repository Contents
 
-- `etno_power_analysis_compact.py` — Monte Carlo simulation that generates Table 3 (small-N convergence power analysis). Simulates synthetic ETNO orbital distributions at varying sample sizes and clustering strengths, analysed with six published clustering statistics.
-- `etno_power_analysis.py` — Extended version of the simulation with additional diagnostic output.
-- `results/power_analysis.json` — Pre-computed output data used to produce Table 3.
+### Core pipeline
+- `generate_all_figures.py` — Main pipeline: all four bias-correction models (A–D), leave-one-out, subset stability, power analysis
+- `clustering_audit.py` — Rayleigh test + bootstrap + CI estimation
+- `subset_stability.py` — Random-subset stability for uncorrected Rayleigh and Model A
+- `leave_one_out.py` — Leave-one-out sensitivity for circular mean and Rayleigh R
 
-## Requirements
+### Supplementary analyses
+- `model_c_selection_likelihood.py` — Model C joint likelihood profile (intrinsic VM + selection function)
+- `model_c_likelihood_profile.py` — Pure von Mises profile likelihood (no selection function)
+- `bayesian_prior_sensitivity.py` — Bayes factor prior sensitivity (4 families × 19 combinations)
+- `joint_2d_test.py` — 2D spherical Rayleigh test (ϖ + i) with MC null distributions
+- `multiple_testing_correction.py` — Bonferroni, Holm, Benjamini-Hochberg corrections
+- `model_b_fpr_paper_model.py` — Injection–recovery using paper's survey_weight model
+- `model_b_uncertainty_v2.py` — Model B systematic uncertainty via injection–recovery
+- `fpr_physical_survey_model.py` — FPR from ecliptic coverage + orbital mechanics
 
-- Python 3.8+
-- NumPy
-- SciPy
+### Data
+- `etno_complete.json` — Orbital elements for 19 ETNOs (JPL SBDB, 2026 June)
+- `etno_data.json` — Alternative data format
+- `etno_fetch.py` — JPL SBDB API retrieval script
 
-## Usage
+### Output
+- `output/` — All script outputs (.txt, .log, .png, .tex)
 
-```bash
-# Reproduce Table 3
-python3 etno_power_analysis_compact.py
+### Experimental / pending
+- `nbody_scattering.py` — REBOUND N-body scattering simulation (requires REBOUND + CUDA; not yet validated)
+- `run_nbody_grid.bat` — Windows batch file for 6-GPU grid runs
 
-# Expected output: tabular summary of p-value spreads and convergence fractions
-# for κ = 0.0, 0.3, 0.5, 0.7 at N = 20, 50, 100, 150, 200
-```
-
-The simulation draws synthetic ETNO samples from isotropic (κ = 0.0) and clustered (κ = 0.3, 0.5, 0.7) orbital distributions, then applies:
-- Rayleigh test (uniformity of longitudes)
-- Survey-weighted Rayleigh tests (Pan-STARRS, DES, OSSOS footprints)
-- Kuiper test
-- Monte Carlo reference
-
-Convergence is defined as all six methods simultaneously yielding p < 0.05.
+## Dependencies
+- numpy, scipy, matplotlib
+- (optional) rebound, reboundx for N-body module
 
 ## License
+MIT License.
 
-MIT
+## Citation
+If you use this code, please cite the accompanying manuscript and the Zenodo archive:
+[Zenodo DOI to be added]
+
+## Author
+Zhilei Chen, Guangdong Peizheng College. 2604513@peizheng.edu.cn

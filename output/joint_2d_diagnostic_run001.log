@@ -1,0 +1,64 @@
+======================================================================
+2D vs 1D Clustering Tension — Diagnostic Analysis
+======================================================================
+  N = 19
+  Observed: 1D R = 0.5052, 2D R_sphere = 0.5619
+  ϖ-i correlation = -0.1167
+
+  H0_full (both ϖ,i uniform):  median R = 0.2051
+                                 p = 0.000220
+
+  H0_ibin (ϖ random in i-bins): median R = 0.3485
+                                  p = 0.006180
+
+  H0_iboot (ϖ random, i fixed):  median R = 0.3489
+                                  p = 0.006260
+
+  H0_1d (ϖ uniform):             median R = 0.1924
+                                  p = 0.005660
+
+--- Decomposition: equatorial (ϖ) vs axial (i) ---
+  Observed R_xy = 0.4762  (equatorial, ϖ-dependent)
+  Observed R_z  = +0.2983  (axial, i-dependent)
+  Null median R_xy (ϖ random) = 0.1813
+  Null median R_z  (full unif) = -0.0005
+  p(R_xy | i fixed) = 0.007040
+  p(R_z  | uniform) = 0.023480
+
+--- Survey-weighted ϖ clustering test ---
+  Mean detection prob  = 0.970
+  Min detection prob   = 0.424 (highest-i object)
+  Observed R (weighted)= 0.5052
+  Null median R (weighted) = 0.1953
+  p(survey-weighted)   = 0.006560
+
+======================================================================
+DIAGNOSIS: Why is the 2D signal stronger than 1D?
+======================================================================
+
+  1D Rayleigh (ϖ only):      p = 0.0057
+  2D spherical (independence):p = 0.000220
+  2D (ϖ random, i fixed):     p = 0.006260
+  2D equatorial (R_xy):        p = 0.007040
+  2D axial (R_z):              p = 0.023480
+
+The 2D signal is stronger because BOTH ϖ and i deviate from uniformity.
+R_z = +0.2983 (p_z = 0.023480) reflects the survey-biased i distribution,
+NOT intrinsic clustering. The equatorial component R_xy = 0.4762
+(which isolates the ϖ structure) has p = 0.007040 — comparable to 1D p = 0.005660.
+
+Moreover, the detection probability depends on i (surveys are latitude-
+limited). This creates an observed ϖ-i correlation through selection, not
+through dynamics. The survey-weighted ϖ test gives p = 0.006560 —
+comparable to the unweighted 1D result.
+
+WARNING: The equatorial component p = 0.007040 is significant even
+after accounting for the i-marginal distribution. This means the ϖ
+clustering cannot be fully explained by i-dependent detection alone.
+However, at N=19, a more sophisticated survey model (full 6D orbit
+integration through survey footprints) is needed to rule out residual
+selection effects — consistent with the paper's Model B analysis.
+======================================================================
+
+Figure saved: /mnt/d/Papers/MNRAS/submission_record/scripts/output/joint_2d_decomposition.png
+Results saved: /mnt/d/Papers/MNRAS/submission_record/scripts/output/joint_2d_diagnostic.txt

@@ -1,0 +1,5 @@
+Model B Systematic Uncertainty (Proper Injection-Recovery)
+N=19, N_trials=5000
+Baseline FPR = 0.5%
+FPR range = [0.4%, 1.0%]
+Model B p (baseline) ≈ 0.060

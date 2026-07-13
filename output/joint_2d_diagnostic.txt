@@ -1,0 +1,7 @@
+2D vs 1D Clustering Tension — Diagnostic
+1D p = 0.005660
+2D full p = 0.000220
+2D ϖ-rand i-fixed p = 0.006260
+2D R_xy p = 0.007040
+2D R_z p = 0.023480
+Survey-weighted ϖ p = 0.006560

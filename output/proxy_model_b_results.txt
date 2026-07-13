@@ -1,0 +1,16 @@
+Model B Proxy Systematic Uncertainty
+N = 19
+Efficiency sweep (FPR):
+  η=0.70: FPR=1.2%
+  η=0.75: FPR=1.4%
+  η=0.80: FPR=1.4%
+  η=0.85: FPR=1.4%
+  η=0.90: FPR=1.6%
+  η=0.95: FPR=1.1%
+  η=1.00: FPR=1.3%
+
+Subset stability (η=0.85):
+  k=12: median_p=0.0825, 66% exceed 0.05
+  k=14: median_p=0.0500, 49% exceed 0.05
+  k=16: median_p=0.0350, 29% exceed 0.05
+  k=18: median_p=0.0201, 2% exceed 0.05
