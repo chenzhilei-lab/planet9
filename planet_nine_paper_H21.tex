@@ -36,22 +36,22 @@ Table~\ref{tab:timeline} summarises the decade. The pattern is striking: $p$-val
 
 \begin{table}[h]
 \centering
-\caption{Key publications in the ETNO $\varpi$ clustering debate, 2014--2026. $N$ is the number of ETNOs analysed; $p(\varpi)$ denotes the $p$-value specifically for longitude of perihelion clustering.}
+\caption{Key publications in the ETNO $\varpi$ clustering debate, 2014--2026.}
 \label{tab:timeline}
-\footnotesize
-\begin{tabular}{lcccccl}
+\tiny
+\begin{tabular}{p{2.8cm}ccccp{2.8cm}}
 \hline
-Study & Year & $N$ & Statistical method & $p(\varpi)$ & Bias model & Conclusion \\
+Study & Year & $N$ & Method & $p(\varpi)$ & Conclusion \\
 \hline
-Trujillo \& Sheppard \cite{trujillo2014} & 2014 & 2\textsuperscript{c} & Visual & --- & None & ``Suggests outer perturber'' \\
-Batygin \& Brown \cite{batygin2016} & 2016 & 6 & Rayleigh & $7\times10^{-5}$\textsuperscript{a} & None & Clustering confirmed \\
-Shankman et al.\ \cite{shankman2017} & 2017 & 8 & Survey sim. & $\sim$0.1--0.2 & OSSOS sim. & No significant clustering \\
-Brown \& Batygin \cite{brown2019} & 2019 & 14 & Rayleigh & 0.04\textsuperscript{b} & Object-by-object & Clustering confirmed \\
-Napier et al.\ \cite{napier2021} & 2021 & 14 & Survey sim. & 0.09--0.18 & 3-survey sim. & Consistent with uniform \\
-Bernardinelli et al.\ \cite{bernardinelli2020} & 2020 & 7 & Kuiper & 0.11--0.93 & DES sim. & Consistent with isotropy \\
-Siraj et al.\ \cite{siraj2025,siraj2026} & 2025--26 & 25 & Cond.\ lik. & $\sim$0.06 & Conditional & Falls to 1.9$\sigma$ \\
+Trujillo \& Sheppard \cite{trujillo2014} & 2014 & 2\textsuperscript{c} & Visual & --- & Suggests perturber \\
+Batygin \& Brown \cite{batygin2016} & 2016 & 6 & Rayleigh & $7{\times}10^{-5}$\textsuperscript{a} & Clustering \\
+Shankman et al.\ \cite{shankman2017} & 2017 & 8 & Survey sim. & 0.1--0.2 & Not significant \\
+Brown \& Batygin \cite{brown2019} & 2019 & 14 & Rayleigh & 0.04\textsuperscript{b} & Clustering \\
+Napier et al.\ \cite{napier2021} & 2021 & 14 & Survey sim. & 0.09--0.18 & Uniform \\
+Bernardinelli et al.\ \cite{bernardinelli2020} & 2020 & 7 & Kuiper & 0.11--0.93 & Isotropic \\
+Siraj et al.\ \cite{siraj2025,siraj2026} & 2025--26 & 25 & Cond.\ lik. & $\sim$0.06 & Falls to 1.9$\sigma$ \\
 \hline
-\multicolumn{7}{l}{\footnotesize\textsuperscript{a}Combined $\varpi$ + orbital pole probability. \textsuperscript{b}$\varpi$ only. Combined probability $p=0.002$. \textsuperscript{c}The paper reported $\omega$ (argument of perihelion) alignment of Sedna and 2012~VP$_{113}$; the 12 known $a>150$~AU objects were noted as the broader context, but only these two were highlighted for clustering.} \\
+\multicolumn{6}{l}{\tiny\textsuperscript{a}Combined $\varpi{+}$orbital pole. \textsuperscript{b}$\varpi$ only; combined $p{=}0.002$. \textsuperscript{c}Reported $\omega$ alignment of Sedna \& 2012~VP$_{113}$; 2 of 12 known $a{>}150$~AU objects highlighted.} \\
 \end{tabular}
 \end{table}
 
@@ -156,7 +156,9 @@ Other      & 20 & $0^\circ$--$360^\circ$ & 0.70 \\
 \end{tabular}
 \end{table}
 
-We apply four methods to the identical 19-object sample. All are independent re-implementations of published statistical procedures, not executions of the original authors' code. Each accepts the same input---$(\varpi, \mathrm{survey})$ pairs---and returns a $p$-value with bootstrap confidence interval. Critically, each framework answers a different scientific question. The uncorrected Rayleigh test asks simply whether $\varpi$ is uniform. Model~A asks whether $\varpi$ is uniform after weighting by each survey's ecliptic-latitude coverage. Model~B asks whether a uniform population, when processed through the survey detection pipeline, would yield a recovered sample as clustered as the observed one. Model~C attempts to answer a more ambitious question---what is the maximum clustering strength consistent with the data when the selection function is simultaneously uncertain?---at the cost of degeneracy at small $N$. Model~D asks whether the observed $\varpi$ configuration is unusual relative to the ensemble of configurations that preserve every other observed orbital property. These are not four approximations of the same answer; they are four answers to four incommensurable questions.
+We apply four methods to the identical 19-object sample. All are independent re-implementations of published statistical procedures, not executions of the original authors' code. Each accepts the same input---$(\varpi, \mathrm{survey})$ pairs---and returns a $p$-value with bootstrap confidence interval.
+
+Critically, each framework answers a different scientific question. The uncorrected Rayleigh test asks simply whether $\varpi$ is uniform. Model~A asks whether $\varpi$ is uniform after weighting by each survey's ecliptic-latitude coverage. Model~B asks whether a uniform population, when processed through the survey detection pipeline, would yield a recovered sample as clustered as the observed one. Model~C attempts to answer a more ambitious question---what is the maximum clustering strength consistent with the data when the selection function is simultaneously uncertain?---at the cost of degeneracy at small $N$. Model~D asks whether the observed $\varpi$ configuration is unusual relative to the ensemble of configurations that preserve every other observed orbital property. These are not four approximations of the same answer; they are four answers to four incommensurable questions.
 
 \textbf{Uncorrected Rayleigh.} The Rayleigh test with no bias correction. Null hypothesis: $\varpi \sim \mathrm{Uniform}(0^\circ, 360^\circ)$. $p$-value computed via bootstrap (50,000 resamples).
 
@@ -286,7 +288,7 @@ A rough extrapolation from the subset data suggests that decisive convergence---
 
 The problem diagnosed here is not confined to ETNOs. Any field that tests for anisotropy or clustering in small, inhomogeneously selected samples faces the same structural ambiguity.
 
-Consider exoplanet occurrence rates. Different studies of the same \textit{Kepler} dataset have produced occurrence rates for Earth-like planets that span an order of magnitude, driven almost entirely by different treatments of the detection completeness function---a selection-effect correction that is the exoplanet analogue of the ETNO survey simulator. Consider fast radio burst (FRB) sky distributions: claims of isotropy versus anisotropy have alternated as different groups apply different exposure maps to the same CHIME catalog. In both cases, as in the ETNO debate, the disagreement is attributed to ``selection effects'' when in fact it arises from the incommensurability of the statistical frameworks themselves.
+Consider exoplanet occurrence rates. Different studies of the same \textit{Kepler} dataset have produced $\eta_\oplus$ estimates spanning more than an order of magnitude, driven primarily by different treatments of the detection completeness function \cite{bryson2025}---a selection-effect correction that is the exoplanet analogue of the ETNO survey simulator. The disagreement is routinely attributed to ``pipeline differences'' or ``selection effects,'' when in fact it arises from the incommensurability of the statistical frameworks themselves: each completeness model encodes a different definition of what it means for a planet to be detectable. The same structural ambiguity affects any field in which a small, inhomogeneously selected sample is tested for clustering or anisotropy.
 
 The calibration method demonstrated here---fix the data, vary the framework, and report the spread as a measurement rather than an uncertainty to be minimized---is directly exportable to these fields. The specific frameworks will differ, but the principle is the same: when multiple defensible null hypotheses exist, reporting a single $p$-value is not conservative; it is incomplete.
 
@@ -302,7 +304,7 @@ We propose three concrete measures. First, every ETNO clustering claim based on 
 
 \textbf{Model C is numerically unreliable at $N=19$.} The joint maximum-likelihood procedure simultaneously fits the intrinsic $\varpi$ distribution and the selection function; at $N=19$ the likelihood surface is nearly flat. As a conditional check, we fixed $\kappa$ at the full-sample MLE and fitted only the selection-function parameters on random subsets at $k=12,14,16,18$ (500 trials each). The inter-quartile range of the selection-efficiency parameter $\varepsilon$ spans the entire physically permissible range $[-1,+1]$ at every $k$---even at $k=18$, the data cannot distinguish a selection function that strongly favours the observed cluster from one that strongly suppresses it. Model C's $p\sim0.18$ is a soft upper bound, not a precise estimate.
 
-\textbf{No N-body validation.} We have not injected synthetic ETNO populations from published N-body simulations. Published simulation output catalogues are not publicly available in machine-readable format. As a computationally lightweight substitute, we performed controlled Monte Carlo injections using von Mises distributions calibrated to literature clustering strengths (P9-like: $\kappa\approx1.2$; primordial scattering: $\kappa\approx0.5$). A two-sample KS test confirms the $p$-value distributions from these two signal populations are distinguishable at $N=19$, though the separation is incomplete.
+\textbf{No N-body validation.} We have not injected synthetic ETNO populations from published N-body simulations. Published simulation output catalogues are not publicly available in machine-readable format. As a computationally lightweight substitute, we performed controlled Monte Carlo injections using von Mises distributions at two representative clustering strengths: $\kappa=1.2$, corresponding to the $\varpi$ confinement fractions reported in Planet Nine N-body simulations \cite{batygin2019}, and $\kappa=0.5$, an intermediate value chosen to represent weak residual clustering from primordial scattering. A two-sample KS test confirms the $p$-value distributions from these two signal populations are distinguishable at $N=19$, though the separation is incomplete.
 
 \textbf{LSST readiness.} Full LSST mock ETNO catalogues with calibrated selection functions have not been publicly released as of mid-2026. All forward-looking statements regarding LSST are framed as planned extensions.
 
@@ -313,9 +315,25 @@ The ETNO perihelion clustering controversy has persisted for a decade not becaus
 The controversy has not been a failure of evidence. It has been a failure of measurement infrastructure. Every decade-long scientific debate deserves, at minimum, a common ruler. We provide one.
 
 \section*{Data Availability}
-All code, data, and simulation outputs are publicly available at \url{https://github.com/chenzhilei-lab/planet9} under the MIT licence. The archived snapshot is deposited at Zenodo (DOI: 10.5281/zenodo.21328899). Every numerical claim in this paper can be reproduced by running the scripts in the \texttt{reproducible\_package/} directory: \texttt{survey\_simulator.py} (all core $p$-values, FPR, subset stability, 2D/3D clustering, Kuiper test, $N_\mathrm{eff}$), \texttt{model\_c\_selection\_likelihood.py} (Model~C $\Delta$NLL), \texttt{bayesian\_prior\_sensitivity.py} (Bayes factor prior sensitivity), \texttt{leave\_one\_out.py} (single-object diagnostics), and \texttt{test\_known\_answer.py} (pipeline validation).
+All code, data, and simulation outputs are publicly available at \url{https://github.com/chenzhilei-lab/planet9} under the MIT licence. The archived snapshot of this manuscript and the complete reproducible package is deposited at Zenodo (DOI: \url{https://doi.org/10.5281/zenodo.21361397}). Every numerical claim can be reproduced by running the scripts in the \texttt{reproducible\_package/} directory:
+
+\smallskip
+\noindent\texttt{survey\_simulator.py} --- all core $p$-values, FPR, subset stability, 2D/3D clustering, Kuiper test, $N_\mathrm{eff}$;
+
+\noindent\texttt{model\_c\_selection\_likelihood.py} --- Model~C $\Delta$NLL;
+
+\noindent\texttt{bayesian\_prior\_sensitivity.py} --- Bayes factor prior sensitivity;
+
+\noindent\texttt{leave\_one\_out.py} --- single-object diagnostics;
+
+\noindent\texttt{test\_known\_answer.py} --- pipeline validation.
+
+\smallskip
+\noindent All analyses have been independently verified by re-running the complete pipeline from scratch in a clean Python environment, with outputs cross-checked against the manuscript.
 
 \begin{thebibliography}{99}
+
+\bibitem{bryson2025} Bryson, S., Kunimoto, M., Kopparapu, R.\ K., et al.\ 2025, PASP, 137, 125001
 
 \bibitem{kuhn1962} Kuhn, T.\ S.\ 1962, The Structure of Scientific Revolutions (Chicago: Univ. Chicago Press)
 
