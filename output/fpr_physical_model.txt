@@ -1,4 +1,0 @@
-FPR from Physical Survey Model
-N=19, N_trials=5000, N_orbit_pts=50
-FPR = 0.7% [0.5%, 1.0%]
-Median p = 0.8368

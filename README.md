@@ -1,49 +1,116 @@
-# planet9 — ETNO Clustering Statistical Calibration Pipeline
+# ETNO Survey Simulator
 
-An open-source pipeline for auditing the statistical evidence for Planet Nine from extreme trans-Neptunian object (ETNO) perihelion clustering.
+Public, open-source survey simulator for ETNO perihelion clustering statistics. Replicates the four major published bias-correction paradigms on a common sample using only published survey parameters. Accompanies Chen (2026), MNRAS.
 
-**Manuscript**: "How much does the null hypothesis matter? A model-free bootstrap exposes the assumption-dependence of ETNO clustering significance" (under review at RAA / SCPMA, 2026).
+## Quick start
 
-## Repository Contents
+```bash
+# 1. Run all analyses
+python run_etno_simulator.py --n-boot 50000 --n-fpr 5000
 
-### Core pipeline
-- `generate_all_figures.py` — Main pipeline: all four bias-correction models (A–D), leave-one-out, subset stability, power analysis
-- `clustering_audit.py` — Rayleigh test + bootstrap + CI estimation
-- `subset_stability.py` — Random-subset stability for uncorrected Rayleigh and Model A
-- `leave_one_out.py` — Leave-one-out sensitivity for circular mean and Rayleigh R
+# 2. Verify correctness
+python test_known_answer.py
 
-### Supplementary analyses
-- `model_c_selection_likelihood.py` — Model C joint likelihood profile (intrinsic VM + selection function)
-- `model_c_likelihood_profile.py` — Pure von Mises profile likelihood (no selection function)
-- `bayesian_prior_sensitivity.py` — Bayes factor prior sensitivity (4 families × 19 combinations)
-- `joint_2d_test.py` — 2D spherical Rayleigh test (ϖ + i) with MC null distributions
-- `multiple_testing_correction.py` — Bonferroni, Holm, Benjamini-Hochberg corrections
-- `model_b_fpr_paper_model.py` — Injection–recovery using paper's survey_weight model
-- `model_b_uncertainty_v2.py` — Model B systematic uncertainty via injection–recovery
-- `fpr_physical_survey_model.py` — FPR from ecliptic coverage + orbital mechanics
+# 3. Use as a Python library
+python -c "
+from etno_simulator import SurveySimulator
+sim = SurveySimulator('etno_complete.json')
+results = sim.run_all()
+print(sim.summary())
+"
+```
 
-### Data
-- `etno_complete.json` — Orbital elements for 19 ETNOs (JPL SBDB, 2026 June)
-- `etno_data.json` — Alternative data format
-- `etno_fetch.py` — JPL SBDB API retrieval script
+## Requirements
 
-### Output
-- `output/` — All script outputs (.txt, .log, .png, .tex)
+- Python 3.8+
+- numpy
+- scipy
 
-### Experimental / pending
-- `nbody_scattering.py` — REBOUND N-body scattering simulation (requires REBOUND + CUDA; not yet validated)
-- `run_nbody_grid.bat` — Windows batch file for 6-GPU grid runs
+```bash
+pip install numpy scipy matplotlib
+```
 
-## Dependencies
-- numpy, scipy, matplotlib
-- (optional) rebound, reboundx for N-body module
+## File overview
 
-## License
-MIT License.
+| File | Purpose |
+|------|---------|
+| `etno_simulator.py` | Core module: `SurveySimulator` class with all statistical frameworks |
+| `run_etno_simulator.py` | CLI entry point |
+| `test_known_answer.py` | Known-answer tests for correctness verification |
+| `etno_complete.json` | JPL SBDB orbital elements for the 19-object ETNO sample (2026-06-13) |
+
+## What it computes
+
+All analyses run on the identical 19-object sample (a > 150 AU, q > 30 AU):
+
+- **Four statistical frameworks:** Uncorrected Rayleigh, Weighted Rayleigh (Brown & Batygin 2019), Injection-recovery proxy (OSSOS paradigm), Bootstrap empirical null (Model D)
+- **False-positive rate:** Survey-induced FPR via 5,000 injection-recovery trials
+- **Leave-one-out sensitivity:** Per-object impact on circular mean and R
+- **Random-subset stability:** p-value distribution at k = 12, 14, 16, 18 (5,000 subsets each)
+- **Spherical clustering:** 2D (ϖ, i) and 3D (ϖ, i, Ω) Rayleigh tests
+- **Kuiper test:** Sensitive to non-unimodal departures from uniformity
+- **Inclination-dependent detection efficiency:** Effective sample size N_eff
+- **N=14 comparison:** All four frameworks on the pre-2021 14-object sample
+
+## Survey parameters
+
+All detection model parameters are from published survey descriptions (Shankman et al. 2017; Brown & Batygin 2019; Napier et al. 2021):
+
+| Survey | Ecliptic latitude | Longitude range | Base efficiency |
+|--------|:---:|:---:|:---:|
+| Pan-STARRS | ±30° | 0°–360° | 0.90 |
+| DES | ±35° | 0°–180° | 0.85 |
+| Subaru/HSC | ±5° | 330°–60° | 0.95 |
+| Other | ±20° | 0°–360° | 0.70 |
+
+## Known-answer tests
+
+Run `python test_known_answer.py` to verify:
+
+1. Uniform ϖ (N=100) → p ≈ 0.5 (simulator does not create spurious clustering)
+2. Clustered ϖ (κ=5) → p ≪ 0.05 (simulator detects real clustering)
+3. Real data: R_obs = 0.505, N = 19, circular mean = 46.3°
+4. Model D ≡ Uncorrected (structural identity verified)
+
+## Reproducing paper numbers
+
+Every numerical claim in the accompanying manuscript can be reproduced:
+
+```bash
+python run_etno_simulator.py --seed 20260713 --n-boot 50000 --n-fpr 5000 --output results.txt
+```
+
+The output file `results.txt` contains all p-values and statistics reported in the paper.
+
+**Expected output (values may fluctuate within MC noise):**
+
+```
+Core four p-values (N=19): ~0.007 / ~0.010 / ~0.07 / ~0.18 / ~0.007
+FPR ≈ 6%
+```
+
+## Limitations
+
+- **Model B is a simplified proxy.** Omits weather losses, chip gaps, per-night pointing variation, and moving-object trailing. The true OSSOS simulator depends on proprietary survey-operations data not publicly available.
+- **Model C is numerically unreliable at N=19.** The joint maximum-likelihood fit has a nearly flat likelihood surface. p ~ 0.18 is a soft upper bound.
+- **No N-body validation.** Synthetic ETNO populations from published simulations are not publicly available in machine-readable format.
 
 ## Citation
-If you use this code, please cite the accompanying manuscript and the Zenodo archive:
-[Zenodo DOI to be added]
 
-## Author
-Zhilei Chen, Guangdong Peizheng College. 2604513@peizheng.edu.cn
+If you use this simulator in your research, please cite:
+
+Chen, Z. (2026). "Statistical Framework Choice—Not Selection Bias—Drives the Decade-Long ETNO Perihelion Clustering Controversy." MNRAS, submitted.
+
+```bibtex
+@article{chen2026etno,
+  author = {Chen, Zhilei},
+  title = {Statistical Framework Choice—Not Selection Bias—Drives the Decade-Long ETNO Perihelion Clustering Controversy},
+  journal = {MNRAS},
+  year = {2026},
+  note = {submitted}
+}
+```
+
+## License
+
+MIT License. See the repository for details.

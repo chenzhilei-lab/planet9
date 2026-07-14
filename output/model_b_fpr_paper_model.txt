@@ -1,5 +1,0 @@
-FPR from Paper's Survey Model
-N=19, N_trials=10000
-Baseline FPR = 0.6%
-FPR range (scale 0.6-1.4) = [0.3%, 0.7%]
-Paper's claimed FPR = 34%

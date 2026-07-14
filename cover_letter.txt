@@ -1,0 +1,24 @@
+Dear Dr. Cuk,
+
+I enclose a manuscript entitled "Same Data, Different Rulers: Why the ETNO Perihelion Clustering Controversy Hasn't Converged" for consideration in Monthly Notices of the Royal Astronomical Society.
+
+This manuscript replaces an earlier submission, MN-26-1949-P, declined on two grounds: it relied on data that did not yet exist, and claimed no novel analytical approach. The present work is grounded in real orbital data for 19 confirmed ETNOs with publicly available JPL elements and isolates the statistical framework itself as the dominant source of the decade-long p-value divergence — a finding that could not have been anticipated when the earlier draft was written.
+
+Three central results are original to this work:
+
+(1) Controlled injection–recovery simulation yields a survey-induced false-positive rate of ~6% for perihelion clustering, demonstrating that heterogeneous survey footprints alone cannot generate the observed signal.
+
+(2) Holding the identical 19-object sample fixed and switching between four published bias-correction paradigms, derived p-values span a factor of ~60 (from p=0.007 to p~0.18). Three of four numerically stable methods confirm clustering at α=0.05; the sole dissenting method (injection–recovery proxy, p=0.07) depends on proprietary survey-operations code not publicly available.
+
+(3) The decade-long controversy has persisted not because the data are ambiguous, but because three logically distinct questions — physical origin, statistical measurement, and observational bias — have been conflated into a single binary debate. We disentangle them via controlled variable decomposition.
+
+The full pipeline is released under an open-source licence as a calibration baseline for LSST-era clustering claims. All numerical values in the manuscript are reproducible by running a single publicly available Python script.
+
+While this manuscript shares a subject with MN-26-1949-P, it differs in data foundation, analytical framework, and central conclusion. It is submitted as a new manuscript, not as a resubmission of the prior work.
+
+I confirm that this manuscript has not been published elsewhere and is not under consideration by any other journal.
+
+Sincerely,
+Zhilei Chen
+Guangdong Peizheng College
+2604513@peizheng.edu.cn

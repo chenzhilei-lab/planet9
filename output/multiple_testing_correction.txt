@@ -1,8 +1,0 @@
-Multiple Testing Correction
-Method                                        Raw     Bonf       BH     Holm
-----------------------------------------------------------------------
-Uncorrected Rayleigh                       0.0080   0.0400   0.0400   0.0400
-Model~A (Brown \& Batygin)                 0.0230   0.1150   0.0575   0.0920
-Model~B (OSSOS, simplified)                0.0890   0.4450   0.1483   0.2670
-Model~C (Napier et al., soft upper bound)   0.1780   0.8900   0.2225   0.3560
-Model~D (bootstrap empirical null)         0.3770   1.0000   0.3770   0.3770

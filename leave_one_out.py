@@ -1,41 +1,42 @@
 #!/usr/bin/env python3
-"""Leave-one-out sensitivity analysis for ETNO clustering."""
+"""Leave-one-out sensitivity for ETNO ϖ clustering."""
+import json, numpy as np
 
-import json
-import math
-import numpy as np
-
-with open("etno_data.json") as f:
+with open("etno_complete.json") as f:
     data = json.load(f)
 
-N = len(data["objects"])
-varpis_rad = np.radians([obj["varpi"] for obj in data["objects"]])
+varpi_rad = np.deg2rad([d["varpi"] for d in data])
+names = [d["label"] for d in data]
+N = len(varpi_rad)
 
-# Full-sample circular mean
-sin_all = np.sum(np.sin(varpis_rad))
-cos_all = np.sum(np.cos(varpis_rad))
-vmean_all = math.degrees(math.atan2(sin_all, cos_all)) % 360
+def R(a): return float(np.abs(np.mean(np.exp(1j*np.asarray(a)))))
 
-print(f"Full sample: N={N}, circular mean varpi = {vmean_all:.1f} deg\n")
-print(f"{'Object':16s} {'varpi':>6s} {'Shift':>7s} {'Leverage':>10s}")
-print("-" * 45)
+R_full = R(varpi_rad)
+cm_full = float(np.rad2deg(np.angle(np.mean(np.exp(1j*varpi_rad)))) % 360)
 
-shifts = []
-for i, obj in enumerate(data["objects"]):
-    mask = np.ones(N, dtype=bool)
-    mask[i] = False
-    loo = varpis_rad[mask]
-    sin_loo = np.sum(np.sin(loo))
-    cos_loo = np.sum(np.cos(loo))
-    vmean_loo = math.degrees(math.atan2(sin_loo, cos_loo)) % 360
-    shift = abs(vmean_loo - vmean_all)
-    if shift > 180:
-        shift = 360 - shift
-    shifts.append((obj["name"], obj["varpi"], shift))
-    lever = ">>> HIGH" if shift > 5 else ""
-    print(f"  {obj['name']:14s} {obj['varpi']:6.1f}  {shift:6.1f} deg  {lever}")
+print(f"N={N}, R_obs={R_full:.4f}, circ_mean={cm_full:.1f} deg\n")
+print(f"{'Object':20s}  {'ϖ':>6s}  {'Shift':>6s}  {'ΔR':>7s}")
+print("-"*48)
 
-shifts.sort(key=lambda x: x[2], reverse=True)
-print(f"\nTop 3 high-leverage objects:")
-for name, v, s in shifts[:3]:
-    print(f"  {name:14s}  varpi={v:.0f} deg  shift={s:.1f} deg")
+for i in range(N):
+    mask = np.ones(N, bool); mask[i] = False
+    vm = varpi_rad[mask]
+    cm_j = float(np.rad2deg(np.angle(np.mean(np.exp(1j*vm)))) % 360)
+    shift = min(abs(cm_j-cm_full), 360-abs(cm_j-cm_full))
+    dR = (1 - R(vm)/R_full)*100
+    flag = " ***" if shift > 5 else ""
+    print(f"  {names[i]:18s}  {data[i]['varpi']:6.1f}  {shift:6.1f}  {dR:+7.1f}%{flag}")
+
+# Identify KG163 and FT28
+for n in names:
+    if "KG163" in n:
+        idx_k = names.index(n)
+    if "FT28" in n:
+        idx_f = names.index(n)
+
+mask_k = np.ones(N, bool); mask_k[idx_k] = False
+mask_f = np.ones(N, bool); mask_f[idx_f] = False
+dR_k = (1 - R(varpi_rad[mask_k])/R_full)*100
+dR_f = (1 - R(varpi_rad[mask_f])/R_full)*100
+print(f"\nKG163 R change: {dR_k:+.1f}%")
+print(f"FT28  R change: {dR_f:+.1f}%")

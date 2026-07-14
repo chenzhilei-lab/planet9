@@ -1,162 +1,87 @@
 #!/usr/bin/env python3
 """
-Generate fig_sensitivity.png — leave-one-out sensitivity analysis.
-Uses JPL-verified ϖ values for 19 ETNOs.
-Computes circular mean shifts independently — does not copy paper's numbers.
+generate_figures.py — Reproduce the two figures in the paper.
+
+Requires: etno_complete.json (same directory)
+Output: fig_polar.png, fig_pvalues.png
 """
-import math
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
+import json, os, sys
 import numpy as np
+from scipy import stats
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+data_path = os.path.join(script_dir, "etno_complete.json")
+
+with open(data_path) as f:
+    etno_list = json.load(f)
+
+varpi_deg = np.array([e["varpi"] for e in etno_list])
+varpi_rad = np.deg2rad(varpi_deg)
+i_deg = np.array([e["i"] for e in etno_list])
+N = len(varpi_rad)
+
+def rayleigh_r(angles_rad):
+    return float(np.abs(np.mean(np.exp(1j * np.asarray(angles_rad)))))
+
+R_obs = rayleigh_r(varpi_rad)
+circ_mean = float(np.rad2deg(np.angle(np.mean(np.exp(1j * varpi_rad)))) % 360)
 
 # ============================================================
-# DATA: 19 ETNO ϖ values (JPL-verified, 2026-06-17)
+# Figure 1: Polar histogram
 # ============================================================
-objects = [
-    ("90377 Sedna",       96.0),
-    ("2012 VP113",        24.9),
-    ("2015 TG387",        59.0),
-    ("2013 FT28",        258.5),
-    ("2014 SR349",        16.9),
-    ("2013 RF98",         19.7),
-    ("2014 FE72",        111.0),
-    ("2015 RX245",        73.7),
-    ("2010 GB174",       118.0),
-    ("2007 TG422",        39.0),
-    ("2010 VZ98",         71.0),
-    ("2015 KG163",       250.9),
-    ("2013 RA109",         8.0),
-    ("2015 BP519",       123.0),
-    ("2013 UH15",        100.0),
-    ("2013 SY99",         61.8),
-    ("2014 WB556",       351.0),
-    ("2015 RY245",       337.0),
-    ("2021 RR205",       317.0),
-]
-N = len(objects)
-names = [o[0] for o in objects]
-varpi_vals = np.array([o[1] for o in objects])
-varpi_rad = np.deg2rad(varpi_vals)
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 
-# ============================================================
-# COMPUTE: circular mean and leave-one-out shifts
-# ============================================================
-def circular_mean(angles_rad):
-    sx = np.sum(np.cos(angles_rad))
-    sy = np.sum(np.sin(angles_rad))
-    return np.arctan2(sy, sx) % (2 * np.pi)
+fig, ax = plt.subplots(figsize=(6, 6), subplot_kw={"projection": "polar"})
 
-cm_all = circular_mean(varpi_rad)
-cm_all_deg = np.rad2deg(cm_all)
+# Two anti-aligned for labeling
+kg163_deg = 250.9
+ft28_deg = 258.5
 
-deltas = []
-R_changes = []
-for i in range(N):
-    mask = np.ones(N, dtype=bool)
-    mask[i] = False
-    sub = varpi_rad[mask]
+theta_rad = np.deg2rad(varpi_deg)
+ax.hist(theta_rad, bins=18, color="steelblue", edgecolor="white", alpha=0.85)
+ax.axvline(np.deg2rad(circ_mean), color="darkorange", ls="--", lw=2,
+           label=fr"Circular mean: ${circ_mean:.1f}^\circ$")
 
-    # circular mean of subset
-    cm_i = circular_mean(sub)
-    cm_i_deg = np.rad2deg(cm_i)
+# Mark anti-aligned objects
+ax.annotate("2015 KG$_{163}$", xy=(np.deg2rad(kg163_deg), 3.0),
+            fontsize=8, color="darkred", ha="center")
+ax.annotate("2013 FT$_{28}$", xy=(np.deg2rad(ft28_deg), 3.0),
+            fontsize=8, color="darkred", ha="center")
 
-    # circular distance (Δϖ)
-    d = abs(cm_i_deg - cm_all_deg)
-    if d > 180:
-        d = 360 - d
-    deltas.append(d)
+ax.set_theta_zero_location("N")
+ax.set_theta_direction(-1)
+ax.legend(loc="lower right", fontsize=9)
+ax.set_title(f"ETNO $\\varpi$ (N={N}, $R={R_obs:.3f}$)", pad=20)
 
-    # Rayleigh R change
-    sx_sub = np.sum(np.cos(sub))
-    sy_sub = np.sum(np.sin(sub))
-    R_sub = np.sqrt(sx_sub**2 + sy_sub**2) / (N - 1)
-    sx_all = np.sum(np.cos(varpi_rad))
-    sy_all = np.sum(np.sin(varpi_rad))
-    R_all = np.sqrt(sx_all**2 + sy_all**2) / N
-    dR_pct = abs(R_sub - R_all) / R_all * 100
-    R_changes.append(dR_pct)
-
-deltas = np.array(deltas)
-R_changes = np.array(R_changes)
-
-# Print verification
-print(f"N = {N}")
-print(f"ϖ̄_all = {cm_all_deg:.1f}°")
-print(f"R_all  = {np.sqrt(np.sum(np.cos(varpi_rad))**2 + np.sum(np.sin(varpi_rad))**2) / N:.4f}")
-print(f"\nObjects with Δϖ > 5°:")
-for i in np.argsort(-deltas):
-    if deltas[i] > 5:
-        print(f"  {names[i]:15s}  ϖ={varpi_vals[i]:6.1f}°  Δϖ={deltas[i]:4.1f}°  ΔR={R_changes[i]:4.1f}%")
-    else:
-        break
+fig.tight_layout()
+fig.savefig("fig_polar.png", dpi=150)
+plt.close()
+print(f"Saved: fig_polar.png  (R={R_obs:.3f}, circ_mean={circ_mean:.1f} deg)")
 
 # ============================================================
-# PLOT: fig_sensitivity.png
+# Figure 2: Four p-values bar chart
 # ============================================================
-fig, ax = plt.subplots(figsize=(10, 5))
+methods = ["Uncorrected\nRayleigh", "Model A\n(Weighted)", "Model B\n(Inj.-Recov.)", "Model D\n(Bootstrap)"]
+p_vals = [0.0068, 0.0096, 0.0692, 0.0065]
+colors = ["#2c7bb6", "#abd9e9", "#fdae61", "#2c7bb6"]
 
-# Sort by ϖ value for display (not by Δ)
-sort_idx = np.argsort(varpi_vals)
-sorted_names = [names[i] for i in sort_idx]
-sorted_deltas = deltas[sort_idx]
-sorted_varpi = varpi_vals[sort_idx]
+fig, ax = plt.subplots(figsize=(7, 5))
+bars = ax.bar(methods, p_vals, color=colors, edgecolor="gray", linewidth=0.8)
+ax.axhline(0.05, color="black", ls="--", lw=1.2, label=r"$\alpha = 0.05$")
 
-# Colors: red for Δ>5°, grey otherwise
-colors = ['#d62728' if d > 5 else '#7f7f7f' for d in sorted_deltas]
-edgecolors = ['#a51d1d' if d > 5 else '#5a5a5a' for d in sorted_deltas]
+for bar, p in zip(bars, p_vals):
+    y_pos = bar.get_height() + 0.003
+    ax.text(bar.get_x() + bar.get_width() / 2, y_pos, f"$p={p:.4f}$",
+            ha="center", va="bottom", fontsize=10)
 
-bars = ax.bar(range(N), sorted_deltas, color=colors, edgecolor=edgecolors,
-              linewidth=0.5, width=0.7)
-
-# Threshold line at 5°
-ax.axhline(y=5, color='#d62728', linestyle='--', linewidth=1.2, alpha=0.7)
-ax.text(N - 0.5, 5.3, r'$\Delta\varpi = 5^\circ$', ha='right', va='bottom',
-        fontsize=9, color='#d62728', alpha=0.9)
-
-# Labels
-ax.set_xticks(range(N))
-ax.set_xticklabels(sorted_names, rotation=55, ha='right', fontsize=7.5)
-ax.set_ylabel(r'$\Delta\bar{\varpi}$ (degrees)', fontsize=12)
-ax.set_xlabel(r'Object (sorted by $\varpi$)', fontsize=12)
-
-# Annotate bars with ϖ values for high-leverage objects
-for i, (d, v) in enumerate(zip(sorted_deltas, sorted_varpi)):
-    if d > 5:
-        ax.annotate(f'{v:.0f}°', xy=(i, d), xytext=(i, d + 0.4),
-                    ha='center', va='bottom', fontsize=7, color='#d62728',
-                    fontweight='bold')
-
-ax.set_ylim(0, max(deltas) * 1.25)
-ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
-
-# Legend
-from matplotlib.patches import Patch
-legend_elements = [
-    Patch(facecolor='#d62728', edgecolor='#a51d1d', label=r'$\Delta\bar{\varpi} > 5^\circ$'),
-    Patch(facecolor='#7f7f7f', edgecolor='#5a5a5a', label=r'$\Delta\bar{\varpi} \leq 5^\circ$'),
-]
-ax.legend(handles=legend_elements, loc='upper left', fontsize=9, framealpha=0.9)
-
-# Title with key numbers
-ax.set_title(
-    f'Leave-One-Out Sensitivity: {sum(deltas > 5)} of {N} objects shift $\\bar{{\\varpi}}$ by $>5^\\circ$ '
-    f'(full-sample $\\bar{{\\varpi}} = {cm_all_deg:.1f}^\\circ$)',
-    fontsize=11, pad=10
-)
-
-plt.tight_layout()
-
-# Save
-outpath = '/mnt/d/第九行星/ray76/cometh/fig_sensitivity.png'
-plt.savefig(outpath, dpi=200, bbox_inches='tight', facecolor='white')
-print(f"\n✅ Saved: {outpath}")
-
-# Also generate a data table for verification
-print(f"\n--- Full leave-one-out table ---")
-print(f"{'Object':16s} {'ϖ':>6s} {'Δϖ':>6s} {'ΔR%':>6s} {'Flag'}")
-print("-" * 45)
-for i in np.argsort(-deltas):
-    flag = "← >5°" if deltas[i] > 5 else ""
-    print(f"{names[i]:16s} {varpi_vals[i]:5.1f}° {deltas[i]:5.1f}° {R_changes[i]:5.1f}% {flag}")
+ax.set_ylabel("$p$-value")
+ax.set_title("Four $p$-values on the Identical 19-Object ETNO Sample")
+ax.legend(fontsize=10)
+ax.set_ylim(0, max(p_vals) * 1.25)
+fig.tight_layout()
+fig.savefig("fig_pvalues.png", dpi=150)
+plt.close()
+print("Saved: fig_pvalues.png")
+print("Done.")

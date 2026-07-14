@@ -1,8 +1,0 @@
-2D Joint (ϖ + i) Clustering Test
-N = 19
-R_sphere = 0.5619
-p (Rayleigh spherical) = 0.000440
-p (MC: ϖ random, i fixed) = 0.0066
-p (MC: both random) = 0.0001
-p (Kuiper 1D, ϖ only) = 0.0103
-p (Kuiper 1D, sin(i)) = 0.0000

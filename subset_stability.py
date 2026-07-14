@@ -9,9 +9,9 @@ import json, math, random, sys
 from collections import Counter
 
 # Load ETNO data
-with open('/mnt/d/Papers/A_ApJ_ETNO/code/etno_data.json') as f:
+with open('etno_complete.json') as f:
     data = json.load(f)
-varpis = [math.radians(obj['varpi']) for obj in data['objects']]
+varpis = [math.radians(obj['varpi']) for obj in data]
 N = len(varpis)
 print(f"Loaded {N} ETNOs.")
 
