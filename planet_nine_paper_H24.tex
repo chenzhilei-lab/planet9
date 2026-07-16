@@ -8,7 +8,7 @@
 
 \title{Same Data, Different Rulers: Why the ETNO Perihelion Clustering Controversy Hasn't Converged}
 
-\author{Zhilei Chen%
+\author[Zhilei Chen]{Zhilei Chen%
 \thanks{E-mail: 2604513@peizheng.edu.cn}%
 \\
 Guangdong Peizheng College, 53 Peizheng Avenue, Guangzhou 510830, China}
@@ -40,7 +40,7 @@ The counter-literature emerged rapidly. Shankman et al.\ (OSSOS) modelled survey
 
 Table~\ref{tab:timeline} summarises the decade. The $p$-values have never converged. As the sample grew from 6 to 25 objects, the range of reported significances widened rather than narrowed.
 
-\begin{table}[h]
+\begin{table*}[htbp]
 \centering
 \caption{Key publications in the ETNO $\varpi$ clustering debate, 2014--2026.}
 \label{tab:timeline}
@@ -59,7 +59,7 @@ Siraj et al.\ \cite{siraj2025,siraj2026} & 2025--26 & 25 & Cond.\ lik. & $\sim$0
 \hline
 \multicolumn{6}{l}{\footnotesize\textsuperscript{a}Combined $\varpi{+}$orbital pole. \textsuperscript{b}$\varpi$ only; combined $p{=}0.002$. \textsuperscript{c}Reported $\omega$ alignment of Sedna \& 2012~VP$_{113}$.} \\
 \end{tabular}
-\end{table}
+\end{table*}
 
 \subsection{Three Dimensions of a Single Controversy}
 
@@ -75,7 +75,7 @@ The three dimensions are isolated on a common platform: a public, open-source su
 
 The ETNO sample consists of all 19 objects meeting the standard criteria ($a>150$~AU, $q>30$~AU, orbit condition code $\leq5$, $\geq2$ oppositions) as of 2026 June. Orbital elements were retrieved from the JPL Small-Body Database API on 2026 June 13. Table~\ref{tab:sample} lists the sample.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.55\textwidth]{fig_polar.png}
 \caption{Polar histogram of the 19 ETNO longitude of perihelion values. The dashed orange line marks the circular mean ($\bar{\varpi}=46.3^\circ$). The mean resultant length is $R=0.505$. Two anti-aligned objects (2015~KG$_{163}$ at $251^\circ$ and 2013~FT$_{28}$ at $259^\circ$) are visible opposite the primary cluster.}
@@ -84,7 +84,7 @@ The ETNO sample consists of all 19 objects meeting the standard criteria ($a>150
 
 The 19 objects were discovered by four principal surveys: Pan-STARRS (7), the Dark Energy Survey (4), Subaru/HSC (4), and smaller surveys (4: Sedna by Palomar, 2007 TG$_{422}$ and 2010 GB$_{174}$ by CFHT, 2010 VZ$_{98}$ by La Silla). The multi-survey composition is methodologically essential: each survey has a distinct sky footprint, magnitude limit, and cadence, and the selection function must be modelled per survey, not as a single smooth function of ecliptic latitude.
 
-\begin{table}[h]
+\begin{table*}[htbp]
 \centering
 \caption{The 19-object ETNO sample ($a>150$~AU, $q>30$~AU). $\varpi = \omega + \Omega$.  All orbital elements retrieved from JPL SBDB 2026-06-13.}
 \label{tab:sample}
@@ -114,7 +114,7 @@ Designation & $a$ (AU) & $q$ (AU) & $\varpi$ ($^\circ$) & Discovery survey \\
 2021 RR$_{205}$       & 951  & 56.0 & 317.0 & Subaru/HSC \\
 \hline
 \end{tabular}
-\end{table}
+\end{table*}
 
 \section{Methods}
 
@@ -141,7 +141,7 @@ of its orbit within the survey's latitude band. The detection probability for a 
 
 The simulator operates in injection--recovery mode. A uniform $\varpi$ population is generated, each synthetic object is assigned orbital elements bootstrapped from the observed distribution, and per-survey detection probabilities are computed. Objects passing the detection threshold form the recovered sample. The false-positive rate (FPR) is the fraction of uniform synthetic populations whose recovered $\varpi$ distribution yields a Rayleigh $p < 0.05$.
 
-\begin{table}[h]
+\begin{table*}[htbp]
 \centering
 \caption{Survey parameters used in the public simulator. All values are from published survey descriptions~\cite{shankman2017,brown2019,napier2021}.}
 \label{tab:surveys}
@@ -156,7 +156,7 @@ Subaru/HSC &  5 & $330^\circ$--$60^\circ$ & 0.95 \\
 Other      & 20 & $0^\circ$--$360^\circ$ & 0.70 \\
 \hline
 \end{tabular}
-\end{table}
+\end{table*}
 
 Four methods are applied to the identical 19-object sample. All are independent re-implementations of published procedures, not executions of the original authors' code. Each accepts the same input, $(\varpi, \mathrm{survey})$ pairs, and returns a $p$-value with bootstrap confidence interval.
 
@@ -199,7 +199,7 @@ The debate has long been structured as "is the clustering real or a selection ar
 
 Table~\ref{tab:pvalues} presents the central result. Holding sample and survey model fixed, the $p$-value varies roughly thirtyfold from the most to the least conservative framework (Model~D at $0.0065$ versus Model~C at $\sim0.18$, the latter being a ceiling rather than a precise estimate). Across the four well-behaved methods the spread is about tenfold.
 
-\begin{table}[h]
+\begin{table*}[htbp]
 \centering
 \caption{Four $p$-values for $\varpi$ clustering, computed on the identical 19-object ETNO sample and on the 14-object sample used by Brown \cite{brown2019} and Napier et al.\ \cite{napier2021}. All values independently reproduced via \texttt{survey\_simulator.py}; complete pipeline publicly available.}
 \label{tab:pvalues}
@@ -217,14 +217,14 @@ Model D (bootstrap empirical null) & 0.505 & 0.0065 & 0.0096 & Yes / Yes \\
 \multicolumn{5}{l}{\footnotesize\textsuperscript{a}Soft upper bound; likelihood surface nearly flat at $N\lesssim19$ (see text). Not a numerically stable estimate.} \\
 \multicolumn{5}{l}{\footnotesize\textsuperscript{b}Simplified proxy omitting weather losses, chip gaps, per-night pointing. $p=0.069$ is a \textit{lower bound}.} \\
 \end{tabular}
-\end{table}
+\end{table*}
 
-\begin{figure}[h]
+\begin{figure*}[htbp]
 \centering
-\includegraphics[width=0.85\textwidth]{fig_pvalues.png}
+\includegraphics[width=0.9\textwidth]{fig_pvalues.png}
 \caption{Four $p$-values for $\varpi$ clustering computed on the identical 19-object ETNO sample. The dashed line marks $\alpha=0.05$. Uncorrected Rayleigh, Model~A, and Model~D all confirm clustering at $\alpha=0.05$ (and at the Bonferroni-corrected $\alpha=0.01$); Model~B (injection--recovery) falls just above the threshold ($p=0.069$) and is the only well-behaved method that does not reach significance.}
 \label{fig:pvalues}
-\end{figure}
+\end{figure*}
 
 Four of the five methods---including Model D, which encodes no survey model whatsoever---produce $p$-values below or near $\alpha=0.05$. The clustering signal is not an artefact of a single statistical choice; it is detected by methods representing three independent null-hypothesis paradigms.
 
