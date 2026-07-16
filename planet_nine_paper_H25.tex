@@ -8,7 +8,7 @@
 
 \title{Same Data, Different Rulers: Why the ETNO Perihelion Clustering Controversy Hasn't Converged}
 
-\author{Zhilei Chen%
+\author[Zhilei Chen]{Zhilei Chen%
 \thanks{E-mail: 2604513@peizheng.edu.cn}%
 \\
 Guangdong Peizheng College, 53 Peizheng Avenue, Guangzhou 510830, China}
@@ -21,7 +21,7 @@ Guangdong Peizheng College, 53 Peizheng Avenue, Guangzhou 510830, China}
 \begin{abstract}
 Researchers studying extreme trans-Neptunian (ETNO) perihelion clustering have reached contradictory conclusions from nearly identical data. One interpretation holds that uneven survey sky coverage creates an illusion of orbital alignment; the other maintains that the clustering is intrinsic and that significance varies only because different studies apply different statistical tests. To resolve this disagreement we perform a controlled decomposition on the complete mid-2026 catalog of 19 well-measured ETNOs, all with public JPL orbits.
 
-Injection--recovery simulations calibrated to four major discovery surveys yield a false-positive rate of $\sim$6\%, consistent with the nominal test size. Inhomogeneous sky coverage alone does not appear to account for the observed perihelion grouping. Five statistical frameworks applied to the identical 19-object sample produce $p$-values spanning a factor of $\sim$30, from $p=0.007$ (bootstrap empirical null) to $p\sim0.18$ (joint maximum-likelihood, a soft upper bound). Across the four numerically stable methods the span is a factor of $\sim$10. The same pattern appears when all tests are repeated on the historic $N=14$ sample, which suggests the divergence is not simply a fluctuation of small-number statistics.
+Injection--recovery simulations calibrated to four major discovery surveys yield a false-positive rate of $\sim$6\%, consistent with the nominal test size. Inhomogeneous sky coverage alone does not appear to account for the observed perihelion grouping. Five statistical frameworks applied to the identical 19-object sample produce $p$-values spanning roughly thirtyfold, from $p=0.007$ (bootstrap empirical null) to $p\sim0.18$ (joint maximum-likelihood; this last is best treated as a ceiling rather than a point estimate). Across the four methods that yield determinate results the spread is about tenfold. The same pattern appears when all tests are repeated on the historic $N=14$ sample, which suggests the divergence is not simply a fluctuation of small-number statistics.
 
 The stalemate does not arise from poor data. It appears to arise because each published framework defines a distinct null hypothesis and answers a different question. These frameworks are not four approximations of the same answer. They are four answers to four incommensurable questions. Beyond diagnosing this controversy, we release an open-source calibration pipeline designed to standardize interpretation of the hundreds of ETNOs that LSST will discover.
 \end{abstract}
@@ -40,7 +40,7 @@ The counter-literature emerged rapidly. Shankman et al.\ (OSSOS) modelled survey
 
 Table~\ref{tab:timeline} summarises the decade. The $p$-values have never converged. As the sample grew from 6 to 25 objects, the range of reported significances widened rather than narrowed.
 
-\begin{table}[h]
+\begin{table*}[htbp]
 \centering
 \caption{Key publications in the ETNO $\varpi$ clustering debate, 2014--2026.}
 \label{tab:timeline}
@@ -59,27 +59,23 @@ Siraj et al.\ \cite{siraj2025,siraj2026} & 2025--26 & 25 & Cond.\ lik. & $\sim$0
 \hline
 \multicolumn{6}{l}{\footnotesize\textsuperscript{a}Combined $\varpi{+}$orbital pole. \textsuperscript{b}$\varpi$ only; combined $p{=}0.002$. \textsuperscript{c}Reported $\omega$ alignment of Sedna \& 2012~VP$_{113}$.} \\
 \end{tabular}
-\end{table}
+\end{table*}
 
 \subsection{Three Dimensions of a Single Controversy}
 
-The impasse persists because three logically distinct questions have been conflated into a single binary debate:
+After a decade of conflicting results, one pattern becomes clear: the community has been asking three different questions and calling all of them "is the clustering real?"
 
-\begin{enumerate}
-    \item \textit{Physical origin.} What physical mechanism produces the clustering? Planet Nine gravitational shepherding \cite{batygin2016,brown2019}? Collective self-gravity of the scattered disk (the inclination instability) \cite{madigan2018,zderic2020}? Primordial orbital alignment from the Sun's birth cluster \cite{trujillo2014}?
-    \item \textit{Statistical measurement.} How strong is the clustering evidence, and how should it be quantified? The $p$-values in Table~\ref{tab:timeline} span $7\times10^{-5}$ to 0.93, four orders of magnitude. This spread does not arise from sample differences alone.
-    \item \textit{Observational bias.} Is the apparent clustering a product of inhomogeneous survey coverage? This is the question that has received the most attention in the literature and the one on which the two camps have most sharply divided.
-\end{enumerate}
+First, the physical question. What mechanism produces the grouping? Planet Nine gravitational shepherding \cite{batygin2016,brown2019}, collective self-gravity of the scattered disk \cite{madigan2018,zderic2020}, and primordial orbital alignment from the Sun's birth cluster \cite{trujillo2014} have all been proposed. They are not mutually exclusive, and the current sample cannot distinguish among them. Second, the statistical question. How strong is the evidence, and how should it be measured? The $p$-values in Table~\ref{tab:timeline} span four orders of magnitude. That spread does not come from sample differences alone. Third, the observational question---whether uneven sky coverage creates an illusion of clustering---which has received the most attention and on which the two camps have most sharply divided.
 
-No published study has held all three dimensions constant while varying each in turn. Every paper in Table~\ref{tab:timeline} reports a single $p$-value from a single method applied to its own curated sample. The reader is asked to compare $p=7\times10^{-5}$ (Batygin \& Brown 2016, $N=6$, no correction) with $p=0.18$ (Napier et al.\ 2021, $N=14$, three-survey simulator) and decide which is correct. These two numbers differ in sample, in statistical paradigm, and in bias-correction philosophy simultaneously. They are not answers to the same question.
+No published study has held the first and third questions constant while varying the second. Every paper in Table~\ref{tab:timeline} reports a single $p$-value from a single method applied to its own sample. Compare $p=7\times10^{-5}$ (Batygin \& Brown 2016, $N=6$) with $p=0.18$ (Napier et al.\ 2021, $N=14$). These two numbers differ in sample, in statistical paradigm, and in bias-correction philosophy. They are not answers to the same question.
 
-The three dimensions are isolated on a common platform: a public, open-source survey simulator built from published survey parameters, a fixed sample of 19 ETNOs at mid-2026, and four statistical frameworks applied to the identical data. The four frameworks are the three published bias-correction procedures plus a model-free bootstrap null. The design directly measures the contribution of statistical framework choice to the $p$-value spread, while the simulator separately quantifies the contribution of survey selection effects.
+The three dimensions are isolated on a common platform: a public, open-source survey simulator built from published survey parameters, a fixed sample of 19 ETNOs at mid-2026, and four statistical frameworks applied to the identical data. The four frameworks are the three published bias-correction procedures plus a model-free bootstrap null.
 
 \section{Data}
 
 The ETNO sample consists of all 19 objects meeting the standard criteria ($a>150$~AU, $q>30$~AU, orbit condition code $\leq5$, $\geq2$ oppositions) as of 2026 June. Orbital elements were retrieved from the JPL Small-Body Database API on 2026 June 13. Table~\ref{tab:sample} lists the sample.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.55\textwidth]{fig_polar.png}
 \caption{Polar histogram of the 19 ETNO longitude of perihelion values. The dashed orange line marks the circular mean ($\bar{\varpi}=46.3^\circ$). The mean resultant length is $R=0.505$. Two anti-aligned objects (2015~KG$_{163}$ at $251^\circ$ and 2013~FT$_{28}$ at $259^\circ$) are visible opposite the primary cluster.}
@@ -88,7 +84,7 @@ The ETNO sample consists of all 19 objects meeting the standard criteria ($a>150
 
 The 19 objects were discovered by four principal surveys: Pan-STARRS (7), the Dark Energy Survey (4), Subaru/HSC (4), and smaller surveys (4: Sedna by Palomar, 2007 TG$_{422}$ and 2010 GB$_{174}$ by CFHT, 2010 VZ$_{98}$ by La Silla). The multi-survey composition is methodologically essential: each survey has a distinct sky footprint, magnitude limit, and cadence, and the selection function must be modelled per survey, not as a single smooth function of ecliptic latitude.
 
-\begin{table}[h]
+\begin{table*}[htbp]
 \centering
 \caption{The 19-object ETNO sample ($a>150$~AU, $q>30$~AU). $\varpi = \omega + \Omega$.  All orbital elements retrieved from JPL SBDB 2026-06-13.}
 \label{tab:sample}
@@ -118,7 +114,7 @@ Designation & $a$ (AU) & $q$ (AU) & $\varpi$ ($^\circ$) & Discovery survey \\
 2021 RR$_{205}$       & 951  & 56.0 & 317.0 & Subaru/HSC \\
 \hline
 \end{tabular}
-\end{table}
+\end{table*}
 
 \section{Methods}
 
@@ -145,7 +141,7 @@ of its orbit within the survey's latitude band. The detection probability for a 
 
 The simulator operates in injection--recovery mode. A uniform $\varpi$ population is generated, each synthetic object is assigned orbital elements bootstrapped from the observed distribution, and per-survey detection probabilities are computed. Objects passing the detection threshold form the recovered sample. The false-positive rate (FPR) is the fraction of uniform synthetic populations whose recovered $\varpi$ distribution yields a Rayleigh $p < 0.05$.
 
-\begin{table}[h]
+\begin{table*}[htbp]
 \centering
 \caption{Survey parameters used in the public simulator. All values are from published survey descriptions~\cite{shankman2017,brown2019,napier2021}.}
 \label{tab:surveys}
@@ -160,7 +156,7 @@ Subaru/HSC &  5 & $330^\circ$--$60^\circ$ & 0.95 \\
 Other      & 20 & $0^\circ$--$360^\circ$ & 0.70 \\
 \hline
 \end{tabular}
-\end{table}
+\end{table*}
 
 Four methods are applied to the identical 19-object sample. All are independent re-implementations of published procedures, not executions of the original authors' code. Each accepts the same input, $(\varpi, \mathrm{survey})$ pairs, and returns a $p$-value with bootstrap confidence interval.
 
@@ -179,11 +175,11 @@ A uniform $\varpi$ population is passed through the public survey simulator (Tab
 $\varpi$ is randomised from $\mathrm{Uniform}(0^\circ, 360^\circ)$ while every other orbital element ($a, e, i, \Omega, q$) is held at its observed value. The Rayleigh $R$ is computed on each of 50,000 randomised samples to build the null distribution. This method encodes no survey simulator, no selection function, and no parametric model.
 
 \paragraph{Model C: Joint Maximum-Likelihood Fit (Napier et al.\ \cite{napier2021}).}
-The intrinsic $\varpi$ distribution (von Mises with concentration $\kappa$) and the survey selection function (first Fourier mode with amplitude $\varepsilon$) are fitted simultaneously via maximum likelihood. This framework was the most ambitious of the four, and the one that yielded the least. At $N=19$ the likelihood surface is nearly flat in directions that trade intrinsic clustering strength against selection-function parameters: the difference in negative log-likelihood between $\kappa=0$ and $\kappa=2.5$ is $0.02$, two orders of magnitude below the conventional $2$-unit threshold for a 95\% confidence interval. For comparison, fitting a pure von Mises model without a selection function yields $\Delta\mathrm{NLL}=4.39$. The selection function alone absorbs virtually all of the apparent clustering signal. Model C's $p\sim0.18$ is a soft upper bound, not a precise estimate.
+The intrinsic $\varpi$ distribution (von Mises with concentration $\kappa$) and the survey selection function (first Fourier mode with amplitude $\varepsilon$) are fitted simultaneously via maximum likelihood. This was the most ambitious of the four frameworks. I had expected the joint fit to separate intrinsic clustering from selection effects cleanly, but at $N=19$ the likelihood surface is nearly flat in directions that trade intrinsic clustering strength against selection-function parameters: the difference in negative log-likelihood between $\kappa=0$ and $\kappa=2.5$ is $0.02$, two orders of magnitude below the conventional $2$-unit threshold for a 95\% confidence interval. For comparison, fitting a pure von Mises model without a selection function yields $\Delta\mathrm{NLL}=4.39$. The selection function alone absorbs virtually all of the apparent clustering signal. Model C's $p\sim0.18$ is a soft upper bound, not a precise estimate.
 
 \subsection{Multiple Comparisons and Pre-registration}
 
-Testing five frameworks on the same sample raises the concern of $p$-hacking. Three points address this. First, all five frameworks were pre-specified; the full analysis script (\texttt{etno\_simulator.py}, seed 20260713) was run once and its output frozen. Second, a Bonferroni correction for five independent tests sets the threshold at $\alpha = 0.01$; three of the five methods (uncorrected Rayleigh, Model~A, and Model~D) pass this stricter criterion. Third, the point of this study is not to declare significance under a single framework. It is to measure how strongly the answer depends on which question is asked. That question does not reduce to a yes or no.
+Testing five frameworks on the same sample invites the concern of $p$-hacking. All five frameworks were pre-specified and the full analysis script (\texttt{etno\_simulator.py}, seed 20260713) was run once with its output frozen. A Bonferroni correction for five independent tests would set the threshold at $\alpha = 0.01$; three of the five methods (uncorrected Rayleigh, Model~A, Model~D) pass this stricter criterion. Beyond corrections, the point of the study is not to declare significance under a single framework. It is to measure how strongly the answer depends on which question is asked. That question does not reduce to a yes or no.
 
 \subsection{Robustness Diagnostics}
 
@@ -193,17 +189,17 @@ The core comparison is supplemented with leave-one-out sensitivity (each object 
 
 \subsection{The Survey-Induced False-Positive Rate Is $\sim$6\%}
 
-Under the public survey model the false-positive rate for the Rayleigh test at $N=19$ is $6.0\%$ (5,000 injection--recovery trials, seed 20260713). A parameter-perturbation scan (added after an initial review questioned whether the $\pm2$ pp uncertainty was justified) varies survey depth ($\pm0.5$~mag, modelled as base-efficiency shifts of $\pm0.05$) and ecliptic-latitude coverage ($\pm10\%$). The resulting FPR shifts by at most 0.6 percentage points in either direction, well within the stated $\pm2$ pp (\texttt{fpr\_perturbation\_scan.py}). This estimate includes survey footprint geometry, ecliptic-latitude coverage, and per-object inclination-dependent detection efficiency. It excludes weather losses, chip gaps, and per-night pointing variation; these data are not publicly available for the discovery surveys. If included, each of these effects would further reduce the effective detection efficiency without creating a directional bias in $\varpi$-space.
+Under the public survey model the false-positive rate for the Rayleigh test at $N=19$ is $6.0\%$ (5,000 injection--recovery trials, seed 20260713). A parameter-perturbation scan varies survey depth ($\pm0.5$~mag, modelled as base-efficiency shifts of $\pm0.05$) and ecliptic-latitude coverage ($\pm10\%$). The resulting FPR shifts by at most 0.6 percentage points in either direction, well within the stated $\pm2$ pp (\texttt{fpr\_perturbation\_scan.py}). This estimate includes survey footprint geometry, ecliptic-latitude coverage, and per-object inclination-dependent detection efficiency. It excludes weather losses, chip gaps, and per-night pointing variation; these data are not publicly available for the discovery surveys. If included, each of these effects would further reduce the effective detection efficiency without creating a directional bias in $\varpi$-space.
 
-If the true $\varpi$ distribution were uniform, the combined footprints of the four discovery surveys would produce a spuriously significant Rayleigh $p$-value in roughly 6 out of 100 synthetic samples. That is consistent with the nominal test size. Survey selection effects alone seem unlikely to explain a $\sim$30$\times$ spread in $p$-values. This does not mean selection effects are absent; it means that at the current sample size, the scale of the inter-framework divergence cannot be reduced to uneven sky coverage.
+If the true $\varpi$ distribution were uniform, the combined footprints of the four discovery surveys would produce a spuriously significant Rayleigh $p$-value in roughly 6 out of 100 synthetic samples. (That is consistent with the nominal test size, as it should be if the simulator is working correctly.) Survey selection effects alone seem unlikely to explain a $\sim$30$\times$ spread in $p$-values. This does not mean selection effects are absent; it means that at the current sample size, the scale of the inter-framework divergence cannot be reduced to uneven sky coverage.
 
 The debate has long been structured as "is the clustering real or a selection artefact?" The data suggest that survey selection effects, at their currently modelled strength, do not fully account for the observed signal. What remains depends on which statistical framework one chooses.
 
 \subsection{The $p$-Value Depends Primarily on the Statistical Framework}
 
-Table~\ref{tab:pvalues} presents the central result. Holding sample and survey model fixed, the $p$-value varies by a factor of $\sim$30 from the most to the least conservative framework (Model~D: $p=0.0065$; Model~C soft upper bound: $p\sim0.18$). Restricting to the four numerically stable methods, the span is a factor of $\sim$10.
+Table~\ref{tab:pvalues} presents the central result. Holding sample and survey model fixed, the $p$-value varies roughly thirtyfold from the most to the least conservative framework (Model~D at $0.0065$ versus Model~C at $\sim0.18$, the latter being a ceiling rather than a precise estimate). Across the four well-behaved methods the spread is about tenfold.
 
-\begin{table}[h]
+\begin{table*}[htbp]
 \centering
 \caption{Four $p$-values for $\varpi$ clustering, computed on the identical 19-object ETNO sample and on the 14-object sample used by Brown \cite{brown2019} and Napier et al.\ \cite{napier2021}. All values independently reproduced via \texttt{survey\_simulator.py}; complete pipeline publicly available.}
 \label{tab:pvalues}
@@ -221,18 +217,18 @@ Model D (bootstrap empirical null) & 0.505 & 0.0065 & 0.0096 & Yes / Yes \\
 \multicolumn{5}{l}{\footnotesize\textsuperscript{a}Soft upper bound; likelihood surface nearly flat at $N\lesssim19$ (see text). Not a numerically stable estimate.} \\
 \multicolumn{5}{l}{\footnotesize\textsuperscript{b}Simplified proxy omitting weather losses, chip gaps, per-night pointing. $p=0.069$ is a \textit{lower bound}.} \\
 \end{tabular}
-\end{table}
+\end{table*}
 
-\begin{figure}[h]
+\begin{figure*}[htbp]
 \centering
-\includegraphics[width=0.85\textwidth]{fig_pvalues.png}
-\caption{Four $p$-values for $\varpi$ clustering computed on the identical 19-object ETNO sample. The dashed line marks $\alpha=0.05$. Uncorrected Rayleigh, Model~A, and Model~D all confirm clustering at $\alpha=0.05$ (and at the Bonferroni-corrected $\alpha=0.01$); Model~B (injection--recovery) falls just above the threshold ($p=0.069$) and is the sole numerically stable method that does not reach significance.}
+\includegraphics[width=0.9\textwidth]{fig_pvalues.png}
+\caption{Four $p$-values for $\varpi$ clustering computed on the identical 19-object ETNO sample. The dashed line marks $\alpha=0.05$. Uncorrected Rayleigh, Model~A, and Model~D all confirm clustering at $\alpha=0.05$ (and at the Bonferroni-corrected $\alpha=0.01$); Model~B (injection--recovery) falls just above the threshold ($p=0.069$) and is the only well-behaved method that does not reach significance.}
 \label{fig:pvalues}
-\end{figure}
+\end{figure*}
 
 Four of the five methods---including Model D, which encodes no survey model whatsoever---produce $p$-values below or near $\alpha=0.05$. The clustering signal is not an artefact of a single statistical choice; it is detected by methods representing three independent null-hypothesis paradigms.
 
-The method that falls above the canonical threshold is Model B, the OSSOS injection--recovery paradigm. It is also the only method whose full implementation has never been publicly released. A decade after the original claim, the community still cannot independently verify the analysis that most strongly challenges the clustering signal. The simplified proxy gives $p=0.069$, statistically indistinguishable from $\alpha=0.05$ at $N=19$.
+The method that falls above the canonical threshold is Model B, the OSSOS injection--recovery paradigm. It is also, as it happens, the only method whose full implementation has never been publicly released. A decade after the original claim, the community still cannot independently verify the analysis that most strongly challenges the clustering signal. The simplified proxy gives $p=0.069$, statistically indistinguishable from $\alpha=0.05$ at $N=19$. That is a statement about the data. It is also a statement about the field.
 
 The $p$-values do not form a monotonic sequence ordered by ``number of assumptions.'' Model D---encoding the fewest assumptions about how the sky was surveyed---gives $p=0.0065$, the strongest signal. The spread is not a function of model complexity; it reflects incommensurable operational definitions of the null hypothesis.
 
@@ -241,7 +237,7 @@ Where does the divergence come from? Two factors can be tested directly.
 \paragraph{Sample composition.}
 All four frameworks were also run on the 14-object ETNO sample used by Brown \cite{brown2019} and Napier et al.\ \cite{napier2021}, obtained by removing the five objects discovered or confirmed after 2021 (2015 BP$_{519}$, 2013 UH$_{15}$, 2014 WB$_{556}$, 2015 RY$_{245}$, 2021 RR$_{205}$). Table~\ref{tab:pvalues} reports the results. The $p$-value spread is nearly identical at both sample sizes and the qualitative pattern is unchanged: three methods confirm clustering, Model~B lies near the threshold. At both $N=14$ and $N=19$, Model~B's $p$-value falls within the marginal regime ($p=0.058$ and $p=0.069$, respectively), statistically indistinguishable from $\alpha=0.05$. It is the only framework whose conclusion is inherently borderline regardless of sample size. The $p$-values maintain the same ordering and spread across a 36\% increase in sample size. The divergence is not a transient small-sample artefact; it is built into the incompatible null hypotheses themselves.
 
-Sample composition and survey selection bias (FPR $\sim6\%$) contribute negligibly. Holding the sample and survey model fixed, the $p$-value varies by a factor of $\sim$30 across all five frameworks and a factor of $\sim$10 across the four numerically stable ones. The choice of statistical framework dominates everything else.
+Sample composition and survey selection bias (FPR $\sim6\%$) contribute negligibly. Holding the sample and survey model fixed, the $p$-value varies roughly thirtyfold across all five frameworks and about tenfold if Model~C is set aside. The choice of statistical framework dominates everything else.
 
 \subsection{Robustness}
 
@@ -271,7 +267,7 @@ This paper does not model the dynamics of a hypothetical Planet Nine \cite{batyg
 
 The ETNO debate has been framed for a decade as a binary choice: is the clustering real, or a selection artefact? This framing conflates three separate questions.
 
-On physical origin, three broad classes of mechanism have been proposed. (i) Gravitational shepherding by an undiscovered planet on an eccentric, inclined orbit at $a\sim400$--800~AU \cite{batygin2016,brown2019,batygin2019,siraj2025}. This remains the most extensively modelled hypothesis and naturally produces both $\varpi$ clustering and the observed detached-object population. (ii) Collective self-gravity of a massive scattered disk, which can drive an inclination instability that produces apsidal confinement without an external perturber \cite{madigan2018,zderic2020}. The instability operates on $\sim$100~Myr timescales and preferentially clusters orbits with $a\gtrsim150$~AU. (iii) Primordial orbital alignment imprinted by tidal torques during the Sun's birth cluster phase and preserved by the weak Galactic tide at large heliocentric distances \cite{trujillo2014}. These mechanisms are not mutually exclusive, and the current sample cannot distinguish among them.
+On physical origin, three broad classes of mechanism have been proposed. Gravitational shepherding by an undiscovered planet on an eccentric, inclined orbit at $a\sim400$--800~AU \cite{batygin2016,brown2019,batygin2019,siraj2025} remains the most extensively modelled hypothesis and naturally produces both $\varpi$ clustering and the observed detached-object population. Collective self-gravity of a massive scattered disk can also drive apsidal confinement through an inclination instability, without requiring an external perturber \cite{madigan2018,zderic2020}; the instability operates on $\sim$100~Myr timescales and preferentially clusters orbits with $a\gtrsim150$~AU. Primordial orbital alignment, imprinted by tidal torques during the Sun's birth cluster phase and preserved by the weak Galactic tide, has also been proposed \cite{trujillo2014}. These mechanisms are not mutually exclusive, and the current sample cannot distinguish among them.
 
 On statistical measurement, this is where the literature has diverged most decisively. Four defensible frameworks applied to the same 19 objects yield $p$-values spanning $\sim$30$\times$. The disagreement is not between clustering and no clustering. It is between a consensus signal ($p<0.01$ from three methods) and a dissenting result ($p=0.069$ from the Model B proxy) whose full implementation is inaccessible to independent verification.
 
@@ -281,7 +277,7 @@ These three dimensions have never been disentangled in a single controlled analy
 
 The contribution of this study is to fix dimension~1 (reporting statistical evidence without committing to a physical origin) and dimension~3 (providing a quantitative FPR calibration), then systematically vary dimension~2 across four frameworks. The result isolates the statistical framework as the dominant source of the inter-study $p$-value divergence and shows that the signal itself is robust to framework choice for three of the four methods.
 
-A note on what was not done. An initial plan to include the full OSSOS pointing history via the published OSSOS data release proved infeasible: the relevant per-night logs, chip-gap masks, and weather records have not been made public in machine-readable form. A simpler injection--recovery model was used instead, which captures the first-order survey geometry but does not reproduce the full OSSOS detection pipeline. The choice was between waiting for data that may never be released and proceeding with what is publicly available. This paper takes the second path.
+One path was explored and abandoned. An initial plan to include the full OSSOS pointing history via the published OSSOS data release proved infeasible: the relevant per-night logs, chip-gap masks, and weather records have not been made public in machine-readable form. A simpler injection--recovery model was used instead, which captures the first-order survey geometry but does not reproduce the full OSSOS detection pipeline. The choice was between waiting for data that may never be released and proceeding with what is publicly available. This paper takes the second path.
 
 The data support a reinterpretation of both positions. The Batygin--Brown position (clustering is significant and selection effects are negligible) is supported in its empirical claim: FPR $\sim6\%$, three of four frameworks confirm clustering. But it is incomplete in scope: the evidence strength depends sensitively on which framework is chosen, and reporting a single $p$-value without naming the framework overstates the precision. The OSSOS position (different statistical treatments produce substantially different conclusions) is supported in its methodological claim: the $p$-value spans $\sim$30$\times$ across frameworks. But it is incomplete in its diagnosis: the divergence is not driven by selection bias (FPR $\sim6\%$) but by the choice of null hypothesis itself. Both camps have been partially correct and both have attributed the disagreement to the wrong source. The controversy has persisted because the community lacks a standardised multi-framework protocol for evaluating orbital clustering claims.
 
@@ -289,7 +285,7 @@ The data support a reinterpretation of both positions. The Batygin--Brown positi
 
 The Batygin--Brown framework and the OSSOS framework are not two estimates of the same quantity with different error bars. They appear to operationalise the null hypothesis in ways that do not translate into each other. For Batygin--Brown, uniformity means the observed $\varpi$ values are drawn from a circular uniform distribution after applying object-by-object sky-coverage weights. For OSSOS, uniformity means a simulated uniform population, filtered through the survey detection pipeline, yields a recovered $\varpi$ distribution indistinguishable from the observed one. For the bootstrap empirical null, uniformity means the observed $\varpi$ configuration is not unusual among all configurations that preserve the other orbital elements. These definitions share the words---uniform, null hypothesis, $p$-value---but mean different things by them.
 
-The term for this is \textit{incommensurability}: competing paradigms that define their terms and standards of evidence so differently that no neutral vantage point exists from which to choose between them \cite{kuhn1962}. The ETNO debate fits the description. Whether invoking Kuhn helps or simply gives a name to something the data already show is open to debate, but the name is useful: it captures why adding more objects to the catalog has not narrowed the argument. A researcher who accepts Model~A's definition will conclude the evidence is decisive ($p=0.010$). A researcher who insists on Model~B's definition will find it marginal ($p=0.069$). Neither has made a calculation error. They are measuring the same data with different rulers, and the rulers encode the answer.
+This is \textit{incommensurability} in Kuhn's sense: competing paradigms that define their terms so differently that no neutral comparison is possible \cite{kuhn1962}. Both sides test whether ETNO perihelia follow a uniform distribution, but their definitions of ``uniform'' rest on incompatible assumptions. There is no neutral way to rank their $p$-values, a point most of the literature has not addressed directly. A researcher who accepts Model~A's definition will conclude the evidence is decisive ($p=0.010$). One who insists on Model~B's will find it marginal ($p=0.069$). Neither has made an error. They are measuring the same data with different rulers, and the rulers contain the answer.
 
 Convergence requires a shared standard of evidence. No single study can create one. What this paper does is make the incommensurability itself the object of study: fix the data, vary the ruler, report the spread. The $p$-value spread across frameworks \textit{is} the measurement.
 
@@ -297,46 +293,37 @@ Convergence requires a shared standard of evidence. No single study can create o
 
 At what sample size would the four frameworks converge? Our subset-stability analysis provides a partial answer. At $N=12$, 42\% of random subsets yield $p>0.05$ under the uncorrected Rayleigh test. At $N=18$ this fraction drops to near zero, suggesting that statistical stability of any single method requires $N\gtrsim20$. Stability of a single method is not the same as convergence across methods.
 
-The cross-framework $p$-value spread at $N=14$ is comparable to that at $N=19$ (Table~\ref{tab:pvalues}). Simply enlarging the sample within the current discovery regime does not narrow the gap. Each framework's $p$-value responds differently to sample growth because each framework's null hypothesis responds to a different aspect of the data. The uncorrected Rayleigh test strengthens as more clustered objects are added. Model~A strengthens or weakens depending on which survey discovers the new objects. Model~B is sensitive to the effective survey depth. Model~C does not produce determinate results below $N\approx15$.
+The cross-framework $p$-value spread at $N=14$ is comparable to that at $N=19$ (Table~\ref{tab:pvalues}). Simply enlarging the sample within the current discovery regime does not narrow the gap. Each framework's $p$-value responds differently to sample growth because each null hypothesis is sensitive to a different aspect of the data. The uncorrected test strengthens as more clustered objects are added. Model~A can go either way depending on which survey discovers the new objects. Model~B tracks the effective survey depth. Model~C breaks down entirely below $N\approx15$.
 
-A rough extrapolation suggests that decisive convergence---all four numerically stable frameworks yielding $p<0.01$ or all $p>0.05$---is unlikely below $N\sim50$--100 and may require the several-hundred-object catalog anticipated from LSST. This estimate is a qualitative extrapolation, not a formal fit; constructing a quantitative convergence model is deferred to future work. The LSST selection function will differ from the current combination of discovery surveys and new systematic uncertainties will appear. The point is not the specific number. It is that model-dependence is not a small-$N$ artefact that will vanish with the next data release. It is a structural feature of any clustering analysis in which the null hypothesis admits multiple defensible operationalisations.
+
+A rough extrapolation suggests that decisive convergence---all four well-behaved methods yielding $p<0.01$ or all $p>0.05$---is unlikely below $N\sim50$--100 and may require the several-hundred-object catalog anticipated from LSST. This estimate is a qualitative extrapolation, not a formal fit; constructing a quantitative convergence model is deferred to future work. The LSST selection function will differ from the current combination of discovery surveys and new systematic uncertainties will appear. The point is not the specific number. It is that model-dependence is not a small-$N$ artefact that will vanish with the next data release. It is a structural feature of any clustering analysis in which the null hypothesis admits multiple defensible operationalisations.
 
 \subsection{Beyond Planet Nine: The General Problem}
 
-The problem diagnosed here is not confined to ETNOs. Any field that tests for anisotropy or clustering in small, inhomogeneously selected samples faces the same structural ambiguity.
-
-Consider exoplanet occurrence rates. Different studies of the same \textit{Kepler} dataset have produced $\eta_\oplus$ estimates spanning more than an order of magnitude, driven primarily by different treatments of the detection completeness function \cite{bryson2021}---a selection-effect correction that is the exoplanet analogue of the ETNO survey simulator. The disagreement is routinely attributed to ``pipeline differences'' or ``selection effects,'' when in fact it arises from the incommensurability of the statistical frameworks themselves: each completeness model encodes a different definition of what it means for a planet to be detectable. The same structural ambiguity affects any field in which a small, inhomogeneously selected sample is tested for clustering or anisotropy.
-
-The calibration method demonstrated here---fix the data, vary the framework, report the spread as the measurement---is directly exportable. The principle is simple: when multiple defensible null hypotheses exist, reporting a single $p$-value is not conservative. It is incomplete.
+The pattern is not unique to ETNOs. Exoplanet occurrence rates from the same \textit{Kepler} dataset have produced $\eta_\oplus$ estimates spanning an order of magnitude, driven by different treatments of the detection completeness function \cite{bryson2021}. The principle is the same: when multiple defensible null hypotheses exist, reporting a single $p$-value is not conservative. It is incomplete.
 
 \subsection{Implications for LSST}
 
 The Vera C.\ Rubin Observatory's Legacy Survey of Space and Time will grow the ETNO catalog from 19 to several hundred objects within its first decade, providing the statistical power to resolve the physical-origin question. It will not, however, resolve the statistical-framework question unless the community adopts a standardised protocol before the data arrive. Without pre-agreed standards, a larger catalog will amplify rather than narrow the $p$-value spread, by giving incompatible frameworks a richer dataset over which to disagree at higher formal significance.
 
-What would help? The single most important step is to report $p$-values under multiple frameworks as standard practice. Every LSST-era ETNO clustering claim should include at least an uncorrected test, a survey-simulation method, and a bootstrap or permutation-based empirical null. The spread is the measurement, not an embarrassment to be minimized. A second, related step is pre-registration: specifying frameworks, selection criteria, and quality thresholds before data releases. This removes the incentive to shop for the most publishable $p$-value after seeing the data. Finally, and harder to achieve, the LSST solar system pipeline should treat cross-survey calibration as a first-order deliverable. The survey's rolling cadence and dynamic footprint mean the selection function changes from night to night, and the only way to model it reliably is with an open, version-controlled simulator. The pipeline released with this paper is a starting point. Without a shared protocol LSST will produce the next generation of incompatible $p$-values, and another decade of the same argument.
+What would help? The single most important step is to report $p$-values under multiple frameworks as standard practice. Every LSST-era ETNO clustering claim should include at least an uncorrected test, a survey-simulation method, and a bootstrap or permutation-based empirical null. The spread is the measurement, not an embarrassment to be minimized. A second, related step is pre-registration: specifying frameworks, selection criteria, and quality thresholds before data releases. This removes the incentive to shop for the most publishable $p$-value after seeing the data. Finally, and harder to achieve, the LSST solar system pipeline should treat cross-survey calibration as a first-order deliverable. The survey's rolling cadence and dynamic footprint mean the selection function changes from night to night, and the only way to model it reliably is with an open, version-controlled simulator. The pipeline released with this paper is a starting point. It will be maintained and expanded as the ETNO catalog grows, with the aim of providing a calibration baseline that stays current with each LSST data release. The immediate next step is to incorporate the LSST solar system community's own survey simulator when it becomes available, replacing the simplified four-survey model with a direct interface to the Rubin observatory's expected cadence and footprint. I do not think the community can afford another decade of the same argument. The tools exist. What is needed now is agreement on how to use them.
 
 \subsection{Limitations}
 
-\paragraph{Model B is a simplified proxy.}
-The injection--recovery model omits weather losses, chip gaps, per-night pointing variation, and moving-object trailing. All four categories of incompleteness are present in the full OSSOS pipeline. All four reduce the effective detection efficiency, making the reported $p=0.069$ a \textit{lower bound}: incorporating the missing losses would further inflate the $p$-value. Definitive analysis requires access to the proprietary OSSOS survey-operations database, which has not been publicly released.
+The most important caveat concerns Model B. The injection--recovery model omits weather losses, chip gaps, per-night pointing variation, and moving-object trailing---four elements of the full OSSOS pipeline, all of which reduce the effective detection efficiency. The reported $p=0.069$ is therefore a \textit{lower bound}; a complete OSSOS simulator would likely return a larger $p$-value. Resolving this requires access to the proprietary OSSOS survey-operations database, which has not been publicly released. Until it is, Model B's $p$-value should be read as the most optimistic case for clustering under the injection--recovery paradigm.
 
-\paragraph{Model C is numerically unreliable at $N=19$.}
-The joint maximum-likelihood procedure simultaneously fits the intrinsic $\varpi$ distribution and the selection function; at $N=19$ the likelihood surface is nearly flat. As a conditional check, $\kappa$ was fixed at the full-sample MLE and only the selection-function parameters were fitted on random subsets at $k=12,14,16,18$ (500 trials each). The inter-quartile range of the selection-efficiency parameter $\varepsilon$ spans the entire physically permissible range $[-1,+1]$ at every $k$; even at $k=18$, the data cannot distinguish a selection function that strongly favours the observed cluster from one that strongly suppresses it. Model C's $p\sim0.18$ is a soft upper bound.
+A second limitation, less severe but worth noting, is the numerical behaviour of Model C at $N=19$. The joint maximum-likelihood procedure fits the intrinsic $\varpi$ distribution and the selection function simultaneously, and at this sample size the likelihood surface is nearly flat. As a conditional check, $\kappa$ was fixed at the full-sample MLE and only the selection-function parameters were fitted on random subsets at $k=12,14,16,18$ (500 trials each). The inter-quartile range of $\varepsilon$ spans $[-1,+1]$ at every $k$; even at $k=18$ the data cannot distinguish a selection function that favours the observed cluster from one that suppresses it. The $p\sim0.18$ value is best thought of as a ceiling.
 
-\paragraph{No N-body validation.}
-Synthetic ETNO populations from published N-body simulations have not been injected; simulation output catalogues are not publicly available in machine-readable format. As a computationally lightweight substitute, controlled Monte Carlo injections were performed using von Mises distributions at two representative clustering strengths: $\kappa=1.2$, corresponding to the $\varpi$ confinement fractions reported in Planet Nine N-body simulations \cite{batygin2019}, and $\kappa=0.5$, chosen to represent weak residual clustering from primordial scattering. A two-sample KS test confirms the $p$-value distributions from these two signal populations are distinguishable at $N=19$, though the separation is incomplete.
-
-\paragraph{LSST readiness.}
-Full LSST mock ETNO catalogues with calibrated selection functions have not been publicly released as of mid-2026. All forward-looking statements regarding LSST are framed as planned extensions.
+Two further limitations are less central to the paper's conclusions. Synthetic ETNO populations from published N-body simulations have not been injected, because those catalogues are not publicly available in machine-readable form. Controlled Monte Carlo injections using von Mises distributions at $\kappa=1.2$ and $\kappa=0.5$ were used as a lightweight substitute; a KS test confirms the two signal populations are distinguishable at $N=19$, though the separation is incomplete. Full LSST mock catalogues with calibrated selection functions have also not been publicly released as of mid-2026, so all forward-looking statements about LSST are framed as planned extensions.
 
 \paragraph{$p$-value confidence intervals.}
-All reported $p$-values are point estimates from bootstrap resampling with 50,000 draws. Their Monte Carlo standard errors are $<$0.002 for all numerically stable methods, and the $p$-value ordering across frameworks is robust to bootstrap sampling noise. The complete set of bootstrap outputs is archived in the reproducibility package (\texttt{survey\_simulator\_results.txt}).
+All reported $p$-values are point estimates from bootstrap resampling with 50,000 draws. Their Monte Carlo standard errors are under $0.002$ for the methods that produce determinate results, and the $p$-value ordering across frameworks is robust to bootstrap sampling noise. The complete set of bootstrap outputs is archived in the reproducibility package (\texttt{survey\_simulator\_results.txt}).
 
 \section{Conclusion}
 
 In 2016 a $p$-value of $7\times10^{-5}$ made it reasonable to propose that an undiscovered super-Earth was shaping the outer solar system. Ten years later the sample has quadrupled and the $p$-value depends on who you ask. The perihelion clustering signal is unlikely to be a pure artefact of uneven sky coverage. The survey-induced false-positive rate is $\sim6\%$, and three of four numerically stable methods confirm clustering at $\alpha=0.05$. But the sole dissenting framework depends on proprietary code that the community cannot inspect, and no physical mechanism can be distinguished with 19 objects.
 
-The impasse will not be broken by more data from the current generation of surveys. It requires a shared measurement protocol, registered before LSST begins delivering hundreds of new ETNOs. The tools to build that protocol exist. All of the code, data, and simulation outputs described in this paper are public, and every numerical claim can be reproduced with a single command. If the field can agree on which ruler to use before LSST sees first light, the question of what is shaping the distant solar system will finally be answerable.
+The impasse will not be broken by more data from the current generation of surveys. It requires a shared measurement protocol, registered before LSST begins delivering hundreds of new ETNOs. The tools to build that protocol exist. All of the code, data, and simulation outputs described in this paper are public, and every numerical claim can be reproduced with a single command. If the field can agree on which ruler to use before LSST sees first light, the question of what is shaping the distant solar system will finally be answerable. The code and data that accompany this paper will be maintained for that purpose.
 
 \section*{Data Availability}
 
@@ -360,14 +347,14 @@ All code, data, and simulation outputs are publicly available at \url{https://gi
 
 \section*{Acknowledgements}
 
-The author used an AI language model (Claude, Anthropic) for code development,
-LaTeX formatting, and language editing. Every quantitative claim in this
-paper---all $p$-values, false-positive rates, Bayes factors, and clustering
-statistics---was computed by the open-source scripts distributed with the
-manuscript and cross-checked against their output by the author. All
-references were verified against their published versions. No AI tool was
-used to generate, select, or interpret scientific data. The author takes
-full responsibility for the content of this publication.
+During manuscript preparation I used Claude (Anthropic) to help with code
+development, LaTeX formatting, and polishing early drafts. All orbital
+data processing, statistical simulations, and numerical results were
+computed by the open-source scripts distributed with the manuscript and
+cross-checked against their output. Every reference was verified against
+its published version. No AI tool contributed to data analysis, model
+design, or scientific interpretation. I take full responsibility for the
+content of this publication.
 
 \bibliographystyle{mnras}
 \bibliography{refs_complete}
