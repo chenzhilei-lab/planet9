@@ -32,9 +32,13 @@ def main():
     results = sim.run_all(n_boot=args.n_boot, n_fpr=args.n_fpr)
 
     print("--- Core p-values (N=19) ---")
-    for k, v in results["core_pvalues"].items():
-        print(f"  {k}: p = {v}")
+    print(f"  Uncorrected Rayleigh:  p = {results['p_uncorrected']:.4f}")
+    print(f"  Model A (weighted):    p = {results['p_model_a']:.4f}")
+    print(f"  Model B (inj-recov):   p = {results['p_model_b']:.4f}")
+    print(f"  Model C (joint ML):    p ~ 0.18 (soft upper bound)")
+    print(f"  Model D (bootstrap):   p = {results['p_model_d']:.4f}")
     print(f"\nFPR = {results['fpr_pct']:.1f}%  ({results['fpr_count']}/{results['fpr_trials']})")
+    print(f"Circ mean SE = {results['circ_mean_se']:.1f} deg")
 
     if args.output:
         with open(args.output, "w") as f:
