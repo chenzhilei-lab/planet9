@@ -63,15 +63,11 @@ Siraj et al.\ \cite{siraj2025,siraj2026} & 2025--26 & 25 & Cond.\ lik. & $\sim$0
 
 \subsection{Three Dimensions of a Single Controversy}
 
-The impasse persists because three logically distinct questions have been conflated into a single binary debate:
+After a decade of conflicting results, one pattern becomes clear: the community has been asking three different questions and calling all of them "is the clustering real?"
 
-\begin{enumerate}
-    \item \textit{Physical origin.} What physical mechanism produces the clustering? Planet Nine gravitational shepherding \cite{batygin2016,brown2019}? Collective self-gravity of the scattered disk (the inclination instability) \cite{madigan2018,zderic2020}? Primordial orbital alignment from the Sun's birth cluster \cite{trujillo2014}?
-    \item \textit{Statistical measurement.} How strong is the clustering evidence, and how should it be quantified? The $p$-values in Table~\ref{tab:timeline} span $7\times10^{-5}$ to 0.93, four orders of magnitude. This spread does not arise from sample differences alone.
-    \item \textit{Observational bias.} Is the apparent clustering a product of inhomogeneous survey coverage? This is the question that has received the most attention in the literature and the one on which the two camps have most sharply divided.
-\end{enumerate}
+First, the physical question. What mechanism produces the grouping? Planet Nine gravitational shepherding \cite{batygin2016,brown2019}, collective self-gravity of the scattered disk \cite{madigan2018,zderic2020}, and primordial orbital alignment from the Sun's birth cluster \cite{trujillo2014} have all been proposed. They are not mutually exclusive, and the current sample cannot distinguish among them. Second, the statistical question. How strong is the evidence, and how should it be measured? The $p$-values in Table~\ref{tab:timeline} span four orders of magnitude. That spread does not come from sample differences alone. Third, the observational question---whether uneven sky coverage creates an illusion of clustering---which has received the most attention and on which the two camps have most sharply divided.
 
-No published study has held all three dimensions constant while varying each in turn. Every paper in Table~\ref{tab:timeline} reports a single $p$-value from a single method applied to its own curated sample. The reader is asked to compare $p=7\times10^{-5}$ (Batygin \& Brown 2016, $N=6$, no correction) with $p=0.18$ (Napier et al.\ 2021, $N=14$, three-survey simulator) and decide which is correct. These two numbers differ in sample, in statistical paradigm, and in bias-correction philosophy simultaneously. They are not answers to the same question.
+No published study has held the first and third questions constant while varying the second. Every paper in Table~\ref{tab:timeline} reports a single $p$-value from a single method applied to its own sample. Compare $p=7\times10^{-5}$ (Batygin \& Brown 2016, $N=6$) with $p=0.18$ (Napier et al.\ 2021, $N=14$). These two numbers differ in sample, in statistical paradigm, and in bias-correction philosophy. They are not answers to the same question.
 
 The three dimensions are isolated on a common platform: a public, open-source survey simulator built from published survey parameters, a fixed sample of 19 ETNOs at mid-2026, and four statistical frameworks applied to the identical data. The four frameworks are the three published bias-correction procedures plus a model-free bootstrap null. The design directly measures the contribution of statistical framework choice to the $p$-value spread, while the simulator separately quantifies the contribution of survey selection effects.
 
