@@ -32,7 +32,7 @@ methods: statistical -- methods: data analysis -- Kuiper belt: general -- planet
 
 \section{Introduction}
 
-In 2016 Batygin \& Brown reported that six distant Kuiper belt objects shared a common perihelion direction, a configuration expected by chance with probability $p=7\times10^{-5}$ (roughly 3.8$\sigma$). They proposed that an undiscovered super-Earth on an eccentric orbit at $a\sim700$~AU was shepherding these objects into alignment \cite{batygin2016}. The idea was anticipated two years earlier, when Trujillo \& Sheppard noted that Sedna and 2012~VP$_{113}$ shared a similar argument of perihelion and speculated about an unseen perturber \cite{trujillo2014}.
+In 2016 Batygin \& Brown reported that six distant Kuiper belt objects shared a common perihelion direction, a configuration expected by chance with probability $p=7\times10^{-5}$ (roughly 3.8$\sigma$). They proposed that an undiscovered super-Earth on an eccentric orbit at $a\sim700$~AU was shepherding these objects into alignment \cite{batygin2016}. The paper was compelling because it did two things at once: it identified a statistical anomaly and offered a physical mechanism that explained it. That combination---here is a pattern, and here is a planet that would cause it---set the terms of the debate for the next decade. The idea had been anticipated two years earlier, when Trujillo \& Sheppard noted that Sedna and 2012~VP$_{113}$ shared a similar argument of perihelion and speculated about an unseen perturber \cite{trujillo2014}.
 
 A decade later the same orbital data have been examined by four groups using four different frameworks. The reported $p$-values span four orders of magnitude. The field has more objects and better orbits than it did in 2016. What it does not have is a number everyone agrees on.
 
@@ -124,7 +124,7 @@ Designation & $a$ (AU) & $q$ (AU) & $\varpi$ ($^\circ$) & Discovery survey \\
 
 \subsection{Clustering Metric and Statistical Frameworks}
 
-Clustering is quantified with the Rayleigh test. The mean resultant length is
+Clustering is quantified with the Rayleigh test, a standard choice for circular data that reduces the sample to a single number between 0 (uniform) and 1 (perfectly aligned). The mean resultant length is
 \begin{equation}
 R = \frac{1}{N}\Bigl|\sum_{j=1}^{N} \exp(i\varpi_j)\Bigr|,
 \label{eq:rayleigh}
@@ -289,7 +289,7 @@ The data support a reinterpretation of both positions. The Batygin--Brown positi
 
 The Batygin--Brown framework and the OSSOS framework are not two estimates of the same quantity with different error bars. They appear to operationalise the null hypothesis in ways that do not translate into each other. For Batygin--Brown, uniformity means the observed $\varpi$ values are drawn from a circular uniform distribution after applying object-by-object sky-coverage weights. For OSSOS, uniformity means a simulated uniform population, filtered through the survey detection pipeline, yields a recovered $\varpi$ distribution indistinguishable from the observed one. For the bootstrap empirical null, uniformity means the observed $\varpi$ configuration is not unusual among all configurations that preserve the other orbital elements. These definitions share the words---uniform, null hypothesis, $p$-value---but mean different things by them.
 
-Kuhn called this situation \textit{incommensurability}: competing paradigms that define their terms and standards of evidence so differently that no neutral vantage point exists from which to choose between them \cite{kuhn1962}. The ETNO debate is a near-perfect example. A researcher who accepts Model~A's definition will conclude the evidence is decisive ($p=0.010$). A researcher who insists on Model~B's definition will find it marginal ($p=0.069$). Neither has made a calculation error. They are measuring the same data with different rulers, and the rulers encode the answer.
+The term for this is \textit{incommensurability}: competing paradigms that define their terms and standards of evidence so differently that no neutral vantage point exists from which to choose between them \cite{kuhn1962}. The ETNO debate fits the description. Whether invoking Kuhn helps or simply gives a name to something the data already show is open to debate, but the name is useful: it captures why adding more objects to the catalog has not narrowed the argument. A researcher who accepts Model~A's definition will conclude the evidence is decisive ($p=0.010$). A researcher who insists on Model~B's definition will find it marginal ($p=0.069$). Neither has made a calculation error. They are measuring the same data with different rulers, and the rulers encode the answer.
 
 Convergence requires a shared standard of evidence. No single study can create one. What this paper does is make the incommensurability itself the object of study: fix the data, vary the ruler, report the spread. The $p$-value spread across frameworks \textit{is} the measurement.
 
