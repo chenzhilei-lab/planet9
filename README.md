@@ -36,8 +36,11 @@ pip install numpy scipy matplotlib
 |------|---------|
 | `etno_simulator.py` | Core module: `SurveySimulator` class with all statistical frameworks |
 | `run_etno_simulator.py` | CLI entry point |
+| `survey_simulator.py` | Standalone script (wrapper around etno_simulator) |
+| `fpr_perturbation_scan.py` | FPR parameter-perturbation analysis (depth +/-0.5 mag, coverage +/-10%) |
 | `test_known_answer.py` | Known-answer tests for correctness verification |
 | `etno_complete.json` | JPL SBDB orbital elements for the 19-object ETNO sample (2026-06-13) |
+| `refs_complete.bib` | Complete BibTeX bibliography for the accompanying paper |
 
 ## What it computes
 
@@ -82,11 +85,11 @@ python run_etno_simulator.py --seed 20260713 --n-boot 50000 --n-fpr 5000 --outpu
 
 The output file `results.txt` contains all p-values and statistics reported in the paper.
 
-**Expected output (values may fluctuate within MC noise):**
+**Expected output (values may fluctuate within MC noise; seed 20260713):**
 
 ```
-Core four p-values (N=19): ~0.007 / ~0.010 / ~0.07 / ~0.18 / ~0.007
-FPR ≈ 6%
+Core p-values (N=19): 0.0068 / 0.0096 / 0.069 / ~0.18 / 0.0065
+FPR = 5.8%  (bootstrap sampling noise ~0.3 pp)
 ```
 
 ## Limitations
@@ -99,12 +102,12 @@ FPR ≈ 6%
 
 If you use this simulator in your research, please cite:
 
-Chen, Z. (2026). "Statistical Framework Choice—Not Selection Bias—Drives the Decade-Long ETNO Perihelion Clustering Controversy." MNRAS, submitted.
+Chen, Z. (2026). "Same Data, Different Rulers: Why the ETNO Perihelion Clustering Controversy Hasn't Converged." MNRAS, submitted.
 
 ```bibtex
 @article{chen2026etno,
   author = {Chen, Zhilei},
-  title = {Statistical Framework Choice—Not Selection Bias—Drives the Decade-Long ETNO Perihelion Clustering Controversy},
+  title = {Same Data, Different Rulers: Why the ETNO Perihelion Clustering Controversy Hasn't Converged},
   journal = {MNRAS},
   year = {2026},
   note = {submitted}
