@@ -1,55 +1,53 @@
-============================================================ 
-PUBLIC ETNO SURVEY SIMULATOR ¡ª FULL OUTPUT 
-============================================================ 
-N = 19 
-R_obs = 0.5052 
-Circular mean = 46.3 deg 
-Bootstrap SE of circ mean = 18.0 deg 
- 
---- FOUR P-VALUES (N=19) --- 
-Uncorrected Rayleigh:      p = 0.0068 
-Model A (weighted):        p = 0.0096 
-Model B (inj-recov proxy): p = 0.0692 
-Model D (bootstrap null):  p = 0.0065 
-Model C (joint ML):        p ~ 0.18 (soft upper bound) 
- 
---- FALSE-POSITIVE RATE --- 
-FPR = 6.0% (301/5000 trials with p < 0.05) 
- 
---- LEAVE-ONE-OUT --- 
-Max circ mean shift: 6.0 deg (2021 RR205) 
-KG163 R change: -15.6% 
-FT28  R change: -15.0% 
- 
---- SUBSET STABILITY --- 
-k=12: med p = 0.0389, 42% p > 0.05 
-k=14: med p = 0.0269, 30% p > 0.05 
-k=16: med p = 0.0189, 6% p > 0.05 
-k=18: med p = 0.0113, 0% p > 0.05 
- 
---- SPHERICAL CLUSTERING --- 
-2D (varpi+i):      R = 0.5619, p = 4.40e-04 
-3D (varpi+i+Omega): R = 0.4988, p = 8.19e-04 
- 
---- KUIPER TEST --- 
-V = 0.4365, p = 0.0116 
- 
---- INCLINATION DETECTION EFFICIENCY --- 
-N_eff = 13.3 
-Min detection prob: 0.121 (2013 UH15, i=26.1 deg) 
-Max detection prob: 0.900 
- 
---- N=14 COMPARISON --- 
-N=14: Uncorrected p = 0.0093 
-N=14: Model A p     = 0.0126 
-N=14: Model B p     = 0.0577 
-N=14: Model D p     = 0.0096 
- 
-============================================================ 
-SUMMARY 
-============================================================ 
-Core four p-values (N=19): 0.0068 / 0.0096 / 0.0692 / ~0.18 / 0.0065 
-FPR = 6.0% 
-Three methods significant at alpha=0.05: True, True, True 
-One method at threshold: 0.0692 >= 0.05 
- 
+============================================================
+PUBLIC ETNO SURVEY SIMULATOR â€” FULL OUTPUT
+============================================================
+N = 19
+R_obs = 0.5052
+Circular mean = 46.3 deg
+Bootstrap SE of circ mean = 18.0 deg
+
+--- FOUR P-VALUES (N=19) ---
+Uncorrected Rayleigh:      p = 0.0068
+Model A (weighted):        p = 0.0096
+Model B (inj-recov proxy): p = 0.0692
+Model D (bootstrap null):  p = 0.0065
+Model C (joint ML):        p ~ 0.18 (soft upper bound)
+
+--- FALSE-POSITIVE RATE ---
+FPR = 6.0% (301/5000 trials)
+
+--- LEAVE-ONE-OUT ---
+Max circ mean shift: 6.0 deg (2021 RR205)
+KG163 R change: -15.6%
+FT28  R change: -15.0%
+
+--- SUBSET STABILITY ---
+k=12: med p = 0.0389, 42% p > 0.05
+k=14: med p = 0.0269, 30% p > 0.05
+k=16: med p = 0.0189, 6% p > 0.05
+k=18: med p = 0.0113, 0% p > 0.05
+
+--- SPHERICAL CLUSTERING ---
+2D (varpi+i):      R = 0.5619, p = 4.40e-04
+3D (varpi+i+Omega): R = 0.4988, p = 8.19e-04
+
+--- KUIPER TEST ---
+V = 0.4365, p = 0.0116
+
+--- INCLINATION DETECTION EFFICIENCY ---
+N_eff = 13.3
+Min detection prob: 0.121 (2013 UH15, i=26.1 deg)
+Max detection prob: 0.900
+
+--- N=14 COMPARISON ---
+N=14: Uncorrected p = 0.0093
+N=14: Model A p     = 0.0126
+N=14: Model B p     = 0.0577
+N=14: Model D p     = 0.0096
+
+============================================================
+SUMMARY
+============================================================
+Core four p-values (N=19): 0.0068 / 0.0096 / 0.0692 / ~0.18 / 0.0065
+FPR = 6.0%
+Three methods significant at alpha=0.05: [True, True, True]

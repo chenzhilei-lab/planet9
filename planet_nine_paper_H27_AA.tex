@@ -1,34 +1,45 @@
 %===============================================================================
-% H24 — Same Data, Different Rulers (MNRAS format; all H23 review fixes merged)
-% Every number traceable via reproducible_package/ (survey_simulator.py et al.).
+% H27 — Same Data, Different Rulers (A&A format)
+% Body = H25 verbatim (all de-AI rounds + 0717 citation fixes).
+% References: refs_complete.bib, 14/14 independently re-verified 2026-07-17
+% (literature_verification/verification_report_20260717_reaudit.txt).
+% Contingency draft: DO NOT submit while MN-26-2164-P is active at MNRAS.
 %===============================================================================
-\documentclass[usenatbib]{mnras}
+\documentclass{aa}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
-
-\title{Same Data, Different Rulers: Why the ETNO Perihelion Clustering Controversy Hasn't Converged}
-
-\author[Zhilei Chen]{Zhilei Chen%
-\thanks{E-mail: 2604513@peizheng.edu.cn}%
-\\
-Guangdong Peizheng College, 53 Peizheng Avenue, Guangzhou 510830, China}
-
-\date{Accepted ---. Received ---; in original form ---}
+% txfonts omitted — not required for submission; install if font-matching needed
 
 \begin{document}
+
+\title{Same Data, Different Rulers: Why the ETNO Perihelion Clustering Controversy Hasn't Converged}
+\titlerunning{Same Data, Different Rulers}
+
+\author{Zhilei Chen}
+\authorrunning{Zhilei Chen}
+\institute{Guangdong Peizheng College, 53 Peizheng Avenue, Guangzhou 510830, China\\
+\email{2604513@peizheng.edu.cn}}
+
+\date{Received ---; accepted ---}
+
+% A&A structured abstract: five arguments (Context / Aims / Methods / Results /
+% Conclusions). Sentences taken verbatim from the H25 abstract, re-segmented
+% to fit the structure; minimal glue only.
+\abstract
+% Context
+{Researchers studying extreme trans-Neptunian (ETNO) perihelion clustering have reached contradictory conclusions from nearly identical data. One interpretation holds that uneven survey sky coverage creates an illusion of orbital alignment; the other maintains that the clustering is intrinsic and that significance varies only because different studies apply different statistical tests.}
+% Aims
+{To resolve this disagreement we perform a controlled decomposition on the complete mid-2026 catalog of 19 well-measured ETNOs, all with public JPL orbits.}
+% Methods
+{Injection--recovery simulations calibrated to four major discovery surveys quantify the survey-driven false-positive rate. Five statistical frameworks are then applied to the identical 19-object sample, and all tests are repeated on the historic $N=14$ sample.}
+% Results
+{The false-positive rate is $\sim$6\%, consistent with the nominal test size; inhomogeneous sky coverage alone does not appear to account for the observed perihelion grouping. The five frameworks produce $p$-values spanning roughly thirtyfold, from $p=0.007$ (bootstrap empirical null) to $p\sim0.18$ (joint maximum-likelihood; this last is best treated as a ceiling rather than a point estimate). Across the four methods that yield determinate results the spread is about tenfold. The same pattern appears at $N=14$, which suggests the divergence is not simply a fluctuation of small-number statistics.}
+% Conclusions
+{The stalemate does not arise from poor data. It appears to arise because each published framework defines a distinct null hypothesis and answers a different question: these frameworks are not four approximations of the same answer, but four answers to four incommensurable questions. Beyond diagnosing this controversy, we release an open-source calibration pipeline designed to standardize interpretation of the hundreds of ETNOs that LSST will discover.}
+
+\keywords{methods: statistical -- methods: data analysis -- Kuiper belt: general -- planets and satellites: detection -- surveys}
+
 \maketitle
-
-\begin{abstract}
-Researchers studying extreme trans-Neptunian (ETNO) perihelion clustering have reached contradictory conclusions from nearly identical data. One interpretation holds that uneven survey sky coverage creates an illusion of orbital alignment; the other maintains that the clustering is intrinsic and that significance varies only because different studies apply different statistical tests. To resolve this disagreement we perform a controlled decomposition on the complete mid-2026 catalog of 19 well-measured ETNOs, all with public JPL orbits.
-
-Injection--recovery simulations calibrated to four major discovery surveys yield a false-positive rate of $\sim$6\%, consistent with the nominal test size. Inhomogeneous sky coverage alone does not appear to account for the observed perihelion grouping. Five statistical frameworks applied to the identical 19-object sample produce $p$-values spanning roughly thirtyfold, from $p=0.007$ (bootstrap empirical null) to $p\sim0.18$ (joint maximum-likelihood; this last is best treated as a ceiling rather than a point estimate). Across the four methods that yield determinate results the spread is about tenfold. The same pattern appears when all tests are repeated on the historic $N=14$ sample, which suggests the divergence is not simply a fluctuation of small-number statistics.
-
-The stalemate does not arise from poor data. It appears to arise because each published framework defines a distinct null hypothesis and answers a different question. These frameworks are not four approximations of the same answer. They are four answers to four incommensurable questions. Beyond diagnosing this controversy, we release an open-source calibration pipeline designed to standardize interpretation of the hundreds of ETNOs that LSST will discover.
-\end{abstract}
-
-\begin{keywords}
-methods: statistical -- methods: data analysis -- Kuiper belt: general -- planets and satellites: detection -- surveys
-\end{keywords}
 
 \section{Introduction}
 
@@ -345,8 +356,7 @@ All code, data, and simulation outputs are publicly available at \url{https://gi
 \smallskip
 \noindent All analyses have been independently verified by re-running the complete pipeline from scratch in a clean Python environment, with outputs cross-checked against the manuscript.
 
-\section*{Acknowledgements}
-
+\begin{acknowledgements}
 During manuscript preparation I used Claude (Anthropic) to help with code
 development, LaTeX formatting, and polishing early drafts. All orbital
 data processing, statistical simulations, and numerical results were
@@ -355,8 +365,9 @@ cross-checked against their output. Every reference was verified against
 its published version. No AI tool contributed to data analysis, model
 design, or scientific interpretation. I take full responsibility for the
 content of this publication.
+\end{acknowledgements}
 
-\bibliographystyle{mnras}
+\bibliographystyle{aa}
 \bibliography{refs_complete}
 
 \end{document}

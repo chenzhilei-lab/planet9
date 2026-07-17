@@ -1,0 +1,83 @@
+\begin{thebibliography}{}
+\makeatletter
+\relax
+\def\mn@urlcharsother{\let\do\@makeother \do\$\do\&\do\#\do\^\do\_\do\%\do\~}
+\def\mn@doi{\begingroup\mn@urlcharsother \@ifnextchar [ {\mn@doi@}
+  {\mn@doi@[]}}
+\def\mn@doi@[#1]#2{\def\@tempa{#1}\ifx\@tempa\@empty \href
+  {http://dx.doi.org/#2} {doi:#2}\else \href {http://dx.doi.org/#2} {#1}\fi
+  \endgroup}
+\def\mn@eprint#1#2{\mn@eprint@#1:#2::\@nil}
+\def\mn@eprint@arXiv#1{\href {http://arxiv.org/abs/#1} {{\tt arXiv:#1}}}
+\def\mn@eprint@dblp#1{\href {http://dblp.uni-trier.de/rec/bibtex/#1.xml}
+  {dblp:#1}}
+\def\mn@eprint@#1:#2:#3:#4\@nil{\def\@tempa {#1}\def\@tempb {#2}\def\@tempc
+  {#3}\ifx \@tempc \@empty \let \@tempc \@tempb \let \@tempb \@tempa \fi \ifx
+  \@tempb \@empty \def\@tempb {arXiv}\fi \@ifundefined
+  {mn@eprint@\@tempb}{\@tempb:\@tempc}{\expandafter \expandafter \csname
+  mn@eprint@\@tempb\endcsname \expandafter{\@tempc}}}
+
+\bibitem[\protect\citeauthoryear{{Batygin} \& {Brown}}{{Batygin} \&
+  {Brown}}{2016}]{batygin2016}
+{Batygin} K.,  {Brown} M.~E.,  2016, AJ, 151, 22
+
+\bibitem[\protect\citeauthoryear{{Batygin}, {Adams}, {Brown}  \&
+  {Becker}}{{Batygin} et~al.}{2019}]{batygin2019}
+{Batygin} K.,  {Adams} F.~C.,  {Brown} M.~E.,   {Becker} J.~C.,  2019, Phys.
+  Rep., 805, 1
+
+\bibitem[\protect\citeauthoryear{{Bernardinelli}, {Bernstein}, {Sako}
+  et~al.}{{Bernardinelli} et~al.}{2020}]{bernardinelli2020}
+{Bernardinelli} P.~H.,  {Bernstein} G.~M.,  {Sako} M.,   et~al., 2020, Planet.
+  Sci. J., 1, 28
+
+\bibitem[\protect\citeauthoryear{{Brown} \& {Batygin}}{{Brown} \&
+  {Batygin}}{2019}]{brown2019}
+{Brown} M.~E.,  {Batygin} K.,  2019, AJ, 157, 62
+
+\bibitem[\protect\citeauthoryear{{Brown} \& {Batygin}}{{Brown} \&
+  {Batygin}}{2021}]{brown2021}
+{Brown} M.~E.,  {Batygin} K.,  2021, AJ, 162, 219
+
+\bibitem[\protect\citeauthoryear{{Bryson}, {Kunimoto}, {Kopparapu}
+  et~al.}{{Bryson} et~al.}{2021}]{bryson2021}
+{Bryson} S.,  {Kunimoto} M.,  {Kopparapu} R.~K.,   et~al., 2021, AJ, 161, 36
+
+\bibitem[\protect\citeauthoryear{{Kuhn}}{{Kuhn}}{1962}]{kuhn1962}
+{Kuhn} T.~S.,  1962, The Structure of Scientific Revolutions.
+Univ. Chicago Press, Chicago
+
+\bibitem[\protect\citeauthoryear{{Madigan}, {Zderic}, {McCourt}  \&
+  {Fleisig}}{{Madigan} et~al.}{2018}]{madigan2018}
+{Madigan} A.-M.,  {Zderic} A.,  {McCourt} M.,   {Fleisig} J.,  2018, AJ, 156,
+  141
+
+\bibitem[\protect\citeauthoryear{{Napier}, {Gerdes}, {Lin}, {Hamilton},
+  {Bernstein}, {Bernardinelli}  et~al.}{{Napier} et~al.}{2021}]{napier2021}
+{Napier} K.~J.,  {Gerdes} D.~W.,  {Lin} H.~W.,  {Hamilton} S.~J.,  {Bernstein}
+  G.~M.,  {Bernardinelli} P.~H.,   et~al., 2021, Planet. Sci. J., 2, 59
+
+\bibitem[\protect\citeauthoryear{{Shankman}, {Kavelaars}, {Bannister},
+  {Gladman}  et~al.}{{Shankman} et~al.}{2017}]{shankman2017}
+{Shankman} C.,  {Kavelaars} J.~J.,  {Bannister} M.~T.,  {Gladman} B.~J.,
+  et~al., 2017, AJ, 154, 50
+
+\bibitem[\protect\citeauthoryear{{Siraj}, {Chyba}  \& {Tremaine}}{{Siraj}
+  et~al.}{2025}]{siraj2025}
+{Siraj} A.,  {Chyba} C.~F.,   {Tremaine} S.,  2025, ApJ, 978, 139
+
+\bibitem[\protect\citeauthoryear{{Siraj}, {Chyba}  \& {Tremaine}}{{Siraj}
+  et~al.}{2026}]{siraj2026}
+{Siraj} A.,  {Chyba} C.~F.,   {Tremaine} S.,  2026, arXiv e-prints, p.
+  arXiv:2604.25990
+
+\bibitem[\protect\citeauthoryear{{Trujillo} \& {Sheppard}}{{Trujillo} \&
+  {Sheppard}}{2014}]{trujillo2014}
+{Trujillo} C.~A.,  {Sheppard} S.~S.,  2014, Nature, 507, 471
+
+\bibitem[\protect\citeauthoryear{{Zderic} \& {Madigan}}{{Zderic} \&
+  {Madigan}}{2020}]{zderic2020}
+{Zderic} A.,  {Madigan} A.-M.,  2020, AJ, 160, 50
+
+\makeatother
+\end{thebibliography}
