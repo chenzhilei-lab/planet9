@@ -1,1 +1,2 @@
 clean_test fresh_env
+__pycache__/

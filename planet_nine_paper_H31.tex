@@ -1,5 +1,8 @@
 %===============================================================================
-% H24 — Same Data, Different Rulers (MNRAS format; all H23 review fixes merged)
+% H31 — Same Data, Different Rulers (MNRAS format)
+% = H30 + 外科手术式微调: 消去"four answers to four incommensurable questions"
+%   摘要与正文的逐字重复（保留摘要版；正文改写为直陈句）；3处机械对偶句式
+%   改直陈（行163/236/288附近）。Kuhn 框架、标题、ruler 全保留、用量不改。
 % Every number traceable via reproducible_package/ (survey_simulator.py et al.).
 %===============================================================================
 \documentclass[usenatbib]{mnras}
@@ -160,7 +163,7 @@ Other      & 20 & $0^\circ$--$360^\circ$ & 0.70 \\
 
 Four methods are applied to the identical 19-object sample. All are independent re-implementations of published procedures, not executions of the original authors' code. Each accepts the same input, $(\varpi, \mathrm{survey})$ pairs, and returns a $p$-value with bootstrap confidence interval.
 
-Each framework answers a different scientific question. The uncorrected Rayleigh test asks simply whether $\varpi$ is uniform. Model~A asks whether $\varpi$ is uniform after weighting by each survey's ecliptic-latitude coverage. Model~B asks whether a uniform population, when processed through the survey detection pipeline, would yield a recovered sample as clustered as the observed one. Model~C attempts to answer a more ambitious question---what is the maximum clustering strength consistent with the data when the selection function is simultaneously uncertain?---at the cost of degeneracy at small $N$. Model~D asks whether the observed $\varpi$ configuration is unusual relative to the ensemble of configurations that preserve every other observed orbital property. These are not four approximations of the same answer; they are four answers to four incommensurable questions.
+Each framework answers a different scientific question. The uncorrected Rayleigh test asks simply whether $\varpi$ is uniform. Model~A asks whether $\varpi$ is uniform after weighting by each survey's ecliptic-latitude coverage. Model~B asks whether a uniform population, when processed through the survey detection pipeline, would yield a recovered sample as clustered as the observed one. Model~C attempts to answer a more ambitious question---what is the maximum clustering strength consistent with the data when the selection function is simultaneously uncertain?---at the cost of degeneracy at small $N$. Model~D asks whether the observed $\varpi$ configuration is unusual relative to the ensemble of configurations that preserve every other observed orbital property. None of these four questions reduces to any of the others.
 
 \paragraph{Uncorrected Rayleigh.}
 The Rayleigh test with no bias correction. Null hypothesis: $\varpi \sim \mathrm{Uniform}(0^\circ, 360^\circ)$. $p$-value computed via bootstrap (50,000 resamples).
@@ -230,12 +233,12 @@ Four of the five methods---including Model D, which encodes no survey model what
 
 The method that falls above the canonical threshold is Model B, the OSSOS injection--recovery paradigm. It is also, as it happens, the only method whose full implementation has never been publicly released. A decade after the original claim, the community still cannot independently verify the analysis that most strongly challenges the clustering signal. The simplified proxy gives $p=0.069$, statistically indistinguishable from $\alpha=0.05$ at $N=19$. That is a statement about the data. It is also a statement about the field.
 
-The $p$-values do not form a monotonic sequence ordered by ``number of assumptions.'' Model D---encoding the fewest assumptions about how the sky was surveyed---gives $p=0.0065$, the strongest signal. The spread is not a function of model complexity; it reflects incommensurable operational definitions of the null hypothesis.
+The $p$-values do not form a monotonic sequence ordered by ``number of assumptions.'' Model D---encoding the fewest assumptions about how the sky was surveyed---gives $p=0.0065$, the strongest signal. The spread traces instead to how each framework operationalises its null hypothesis.
 
 Where does the divergence come from? Two factors can be tested directly.
 
 \paragraph{Sample composition.}
-All four frameworks were also run on the 14-object ETNO sample used by \citet{brown2019} and \citet{napier2021}, obtained by removing the five objects discovered or confirmed after 2021 (2015 BP$_{519}$, 2013 UH$_{15}$, 2014 WB$_{556}$, 2015 RY$_{245}$, 2021 RR$_{205}$). Table~\ref{tab:pvalues} reports the results. The $p$-value spread is nearly identical at both sample sizes and the qualitative pattern is unchanged: three methods confirm clustering, Model~B lies near the threshold. At both $N=14$ and $N=19$, Model~B's $p$-value falls within the marginal regime ($p=0.058$ and $p=0.069$, respectively), statistically indistinguishable from $\alpha=0.05$. It is the only framework whose conclusion is inherently borderline regardless of sample size. The $p$-values maintain the same ordering and spread across a 36\% increase in sample size. The divergence is not a transient small-sample artefact; it is built into the incompatible null hypotheses themselves.
+All four frameworks were also run on the 14-object ETNO sample used by \citet{brown2019} and \citet{napier2021}, obtained by removing the five objects discovered or confirmed after 2021 (2015 BP$_{519}$, 2013 UH$_{15}$, 2014 WB$_{556}$, 2015 RY$_{245}$, 2021 RR$_{205}$). Table~\ref{tab:pvalues} reports the results. The $p$-value spread is nearly identical at both sample sizes and the qualitative pattern is unchanged: three methods confirm clustering, Model~B lies near the threshold. At both $N=14$ and $N=19$, Model~B's $p$-value falls within the marginal regime ($p=0.058$ and $p=0.069$, respectively), statistically indistinguishable from $\alpha=0.05$. It is the only framework whose conclusion is inherently borderline regardless of sample size. The $p$-values maintain the same ordering and spread across a 36\% increase in sample size. The divergence is built into the incompatible null hypotheses themselves.
 
 Sample composition and survey selection bias (FPR $\sim6\%$) contribute negligibly. Holding the sample and survey model fixed, the $p$-value varies roughly thirtyfold across all five frameworks and about tenfold if Model~C is set aside. The choice of statistical framework dominates everything else.
 
@@ -283,7 +286,7 @@ The data support a reinterpretation of both positions. The Batygin--Brown positi
 
 \subsection{Why the Debate Could Not Resolve Itself}
 
-The Batygin--Brown framework and the OSSOS framework are not two estimates of the same quantity with different error bars. They appear to operationalise the null hypothesis in ways that do not translate into each other. For Batygin--Brown, uniformity means the observed $\varpi$ values are drawn from a circular uniform distribution after applying object-by-object sky-coverage weights. For OSSOS, uniformity means a simulated uniform population, filtered through the survey detection pipeline, yields a recovered $\varpi$ distribution indistinguishable from the observed one. For the bootstrap empirical null, uniformity means the observed $\varpi$ configuration is not unusual among all configurations that preserve the other orbital elements. These definitions share the words---uniform, null hypothesis, $p$-value---but mean different things by them.
+The Batygin--Brown framework and the OSSOS framework appear to operationalise the null hypothesis in ways that do not translate into each other. For Batygin--Brown, uniformity means the observed $\varpi$ values are drawn from a circular uniform distribution after applying object-by-object sky-coverage weights. For OSSOS, uniformity means a simulated uniform population, filtered through the survey detection pipeline, yields a recovered $\varpi$ distribution indistinguishable from the observed one. For the bootstrap empirical null, uniformity means the observed $\varpi$ configuration is not unusual among all configurations that preserve the other orbital elements. These definitions share the words---uniform, null hypothesis, $p$-value---but mean different things by them.
 
 This is \textit{incommensurability} in Kuhn's sense: competing paradigms that define their terms so differently that no neutral comparison is possible \citep{kuhn1962}. Both sides test whether ETNO perihelia follow a uniform distribution, but their definitions of ``uniform'' rest on incompatible assumptions. There is no neutral way to rank their $p$-values, a point most of the literature has not addressed directly. A researcher who accepts Model~A's definition will conclude the evidence is decisive ($p=0.010$). One who insists on Model~B's will find it marginal ($p=0.069$). Neither has made an error. They are measuring the same data with different rulers, and the rulers contain the answer.
 
@@ -347,14 +350,12 @@ All code, data, and simulation outputs are publicly available at \url{https://gi
 
 \section*{Acknowledgements}
 
-During manuscript preparation I used Claude (Anthropic) to help with code
-development, LaTeX formatting, and polishing early drafts. All orbital
-data processing, statistical simulations, and numerical results were
-computed by the open-source scripts distributed with the manuscript and
-cross-checked against their output. Every reference was verified against
-its published version. No AI tool contributed to data analysis, model
-design, or scientific interpretation. I take full responsibility for the
-content of this publication.
+During manuscript preparation I used Claude (Anthropic) for code
+development, LaTeX formatting, and editing of early drafts. All data
+processing, simulations, and numerical results were produced by the
+open-source scripts accompanying this paper. I reviewed and edited all
+AI-assisted material and take full responsibility for the content of
+this publication.
 
 \bibliographystyle{mnras}
 \bibliography{refs_complete}
